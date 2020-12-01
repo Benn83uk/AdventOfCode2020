@@ -39,5 +39,13 @@ namespace AdventOfCode2020.Test
             var result = report.TwoEntriesWhichAddTo2020Multiplied();
             //No assert (don't want to give away the answer)
         }
+        
+        [Test]
+        public void FindThreeEntriesWhichAddTo2020AndReturnEntriesMultipledFromFile()
+        {
+            var report = new ExpenseReport("TestFiles/DayOneExample.txt");
+            var result = report.ThreeEntriesWhichAddTo2020Multiplied();
+            Assert.That(result, Is.EqualTo(241861950));
+        }
     }
 }

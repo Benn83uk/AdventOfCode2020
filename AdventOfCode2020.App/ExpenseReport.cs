@@ -45,5 +45,25 @@ namespace AdventOfCode2020.App
 
             return result;
         }
+
+        public int ThreeEntriesWhichAddTo2020Multiplied()
+        {
+            for (var a = 0; a < _expenses.Length-3; a++)
+            {
+                for (var b = 1; b < _expenses.Length-1; b++)
+                {
+                    for (var c = 2; c < _expenses.Length - 2; c++)
+                    {
+                        var result = _expenses[a] + _expenses[b] + _expenses[c];
+                        if (result == 2020)
+                        {
+                            return _expenses[a] * _expenses[b] * _expenses[c];
+                        }
+                    }
+                }    
+            }
+
+            return INVALID_RESULT;
+        }
     }
 }
