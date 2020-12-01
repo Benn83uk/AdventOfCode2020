@@ -34,18 +34,7 @@ namespace AdventOfCode2020.App
 
             return INVALID_RESULT;
         }
-
-        private static int[] ConvertToIntArray(in string[] lines)
-        {
-            var result = new int[lines.Length];
-            for (var i = 0; i < lines.Length; i++)
-            {
-                result[i] = int.Parse(lines[i]);
-            }
-
-            return result;
-        }
-
+        
         public int ThreeEntriesWhichAddTo2020Multiplied()
         {
             for (var a = 0; a < _expenses.Length-3; a++)
@@ -64,6 +53,17 @@ namespace AdventOfCode2020.App
             }
 
             return INVALID_RESULT;
+        }
+
+        private static int[] ConvertToIntArray(in string[] lines)
+        {
+            var result = new int[lines.Length];
+            for (var i = 0; i < lines.Length; i++)
+            {
+                result[i] = int.Parse(lines[i]);
+            }
+
+            return result;
         }
     }
 }
