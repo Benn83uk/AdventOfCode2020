@@ -12,7 +12,7 @@ namespace AdventOfCode2020.App
             _expenses = expenses;
         }
 
-        public ExpenseReport(string filePath)
+        public ExpenseReport(in string filePath)
         {
             var lines = File.ReadAllLines(filePath);
             _expenses = ConvertToIntArray(lines);
@@ -35,7 +35,7 @@ namespace AdventOfCode2020.App
             return INVALID_RESULT;
         }
 
-        private static int[] ConvertToIntArray(string[] lines)
+        private static int[] ConvertToIntArray(in string[] lines)
         {
             var result = new int[lines.Length];
             for (var i = 0; i < lines.Length; i++)
