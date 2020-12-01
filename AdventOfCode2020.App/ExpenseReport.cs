@@ -18,7 +18,7 @@ namespace AdventOfCode2020.App
             _expenses = ConvertToIntArray(lines);
         }
 
-        public int EntriesWhichAddTo2020Multiplied()
+        public int TwoEntriesWhichAddTo2020Multiplied()
         {
             for (var a = 0; a < _expenses.Length-2; a++)
             {
