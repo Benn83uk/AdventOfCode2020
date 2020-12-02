@@ -32,5 +32,12 @@ namespace AdventOfCode2020.Test
             var list = new PasswordList("TestFiles/DayTwoInput.txt", new CharacterCountPolicyFactory());
             Assert.That(list.NumValid(), Is.EqualTo(439));
         }
+        
+        [Test]
+        public void DayTwoPartTwo()
+        {
+            var list = new PasswordList("TestFiles/DayTwoInput.txt", new CharacterPositionPolicyFactory());
+            Assert.That(list.NumValid(), Is.EqualTo(584));
+        }
     }
 }
