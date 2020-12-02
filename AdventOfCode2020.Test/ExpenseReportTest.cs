@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using AdventOfCode2020.App;
+﻿using AdventOfCode2020.App;
 using NUnit.Framework;
 
 namespace AdventOfCode2020.Test
