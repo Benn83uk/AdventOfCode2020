@@ -22,14 +22,14 @@ namespace AdventOfCode2020.Test
         [Test]
         public void CountValidPasswordsInFile()
         {
-            var list = new PasswordList("TestFiles/DayTwoExample.txt");
+            var list = new PasswordList("TestFiles/DayTwoExample.txt", new CharacterCountPolicyFactory());
             Assert.That(list.NumValid(), Is.EqualTo(2));
         }
         
         [Test]
         public void DayTwoPartOne()
         {
-            var list = new PasswordList("TestFiles/DayTwoInput.txt");
+            var list = new PasswordList("TestFiles/DayTwoInput.txt", new CharacterCountPolicyFactory());
             Assert.That(list.NumValid(), Is.EqualTo(439));
         }
     }

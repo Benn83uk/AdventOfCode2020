@@ -12,10 +12,10 @@ namespace AdventOfCode2020.App
             _password = password;
         }
 
-        public Password(string passwordString)
+        public Password(string passwordString, IPasswordPolicyFactory policyFactory)
         {
             var splitByColon = passwordString.Split(": ");
-            _policy = new CharacterCountPolicy(splitByColon[0]);
+            _policy = policyFactory.CreateFromString(splitByColon[0]);
             _password = splitByColon[1];
         }
 

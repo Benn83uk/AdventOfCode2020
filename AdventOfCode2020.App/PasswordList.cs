@@ -11,10 +11,10 @@ namespace AdventOfCode2020.App
             _passwords = passwords;
         }
 
-        public PasswordList(string filePath)
+        public PasswordList(string filePath, IPasswordPolicyFactory policyFactory)
         {
             var lines = File.ReadAllLines(filePath);
-            _passwords = lines.Select(line => new Password(line)).ToArray();
+            _passwords = lines.Select(line => new Password(line, policyFactory)).ToArray();
         }
 
         public int NumValid()

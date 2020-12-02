@@ -28,7 +28,7 @@ namespace AdventOfCode2020.Test
             var policy = new CharacterCountPolicy('a', 1, 3);
             var expectedPassword = new Password("abcde", policy);
             
-            var password = new Password("1-3 a: abcde");
+            var password = new Password("1-3 a: abcde", new CharacterCountPolicyFactory());
             Assert.That(password, Is.EqualTo(expectedPassword));
         }
     }
