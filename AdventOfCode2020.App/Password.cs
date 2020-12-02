@@ -15,7 +15,7 @@ namespace AdventOfCode2020.App
         public Password(string passwordString)
         {
             var splitByColon = passwordString.Split(": ");
-            _policy = new PasswordPolicy(splitByColon[0]);
+            _policy = new CharacterCountPolicy(splitByColon[0]);
             _password = splitByColon[1];
         }
 

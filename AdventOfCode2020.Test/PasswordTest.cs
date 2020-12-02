@@ -9,7 +9,7 @@ namespace AdventOfCode2020.Test
         [Test]
         public void PasswordIsValid()
         {
-            var policy = new PasswordPolicy('a', 1, 3);
+            var policy = new CharacterCountPolicy('a', 1, 3);
             var password = new Password("aaa", policy);
             Assert.That(password.IsValid(), Is.True);
         }
@@ -17,7 +17,7 @@ namespace AdventOfCode2020.Test
         [Test]
         public void PasswordIsNotValid()
         {
-            var policy = new PasswordPolicy('a', 1, 3);
+            var policy = new CharacterCountPolicy('a', 1, 3);
             var password = new Password("aaaa", policy);
             Assert.That(password.IsValid(), Is.False);
         }
@@ -25,7 +25,7 @@ namespace AdventOfCode2020.Test
         [Test]
         public void PasswordCreatedFromString()
         {
-            var policy = new PasswordPolicy('a', 1, 3);
+            var policy = new CharacterCountPolicy('a', 1, 3);
             var expectedPassword = new Password("abcde", policy);
             
             var password = new Password("1-3 a: abcde");
