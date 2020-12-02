@@ -14,17 +14,7 @@ namespace AdventOfCode2020.App
             _minAppearances = minAppearances;
             _maxAppearances = maxAppearances;
         }
-
-        public CharacterCountPolicy(string policy)
-        {
-            var splitBySpace = policy.Split(' ');
-            var range = splitBySpace[0];
-            _character = splitBySpace[1][0];
-            var rangeSplitByDash = range.Split("-");
-            _minAppearances = int.Parse(rangeSplitByDash[0]);
-            _maxAppearances = int.Parse(rangeSplitByDash[1]);
-        }
-
+        
         public bool IsValid(string password)
         {
             var characterCount = CountCharacters(password);
