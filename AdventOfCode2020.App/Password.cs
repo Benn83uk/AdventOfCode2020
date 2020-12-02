@@ -4,9 +4,9 @@ namespace AdventOfCode2020.App
 {
     public class Password
     {
-        private readonly PasswordPolicy _policy;
+        private readonly IPasswordPolicy _policy;
         private readonly string _password;
-        public Password(string password, PasswordPolicy policy)
+        public Password(string password, IPasswordPolicy policy)
         {
             _policy = policy;
             _password = password;

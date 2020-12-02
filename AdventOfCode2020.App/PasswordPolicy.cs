@@ -2,7 +2,7 @@ using System;
 
 namespace AdventOfCode2020.App
 {
-    public class PasswordPolicy
+    public class PasswordPolicy : IPasswordPolicy
     {
         private readonly char _character;
         private readonly int _minAppearances;
