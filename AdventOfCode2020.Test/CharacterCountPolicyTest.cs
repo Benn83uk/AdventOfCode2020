@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace AdventOfCode2020.Test
 {
     [TestFixture]
-    public class PasswordPolicyTest
+    public class CharacterCountPolicyTest
     {
         [Test]
         public void PasswordMeetsPolicy()
