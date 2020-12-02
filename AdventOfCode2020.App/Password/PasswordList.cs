@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
 
-namespace AdventOfCode2020.App
+namespace AdventOfCode2020.App.Password
 {
     public class PasswordList
     {

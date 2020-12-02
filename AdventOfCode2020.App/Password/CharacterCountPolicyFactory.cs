@@ -1,4 +1,4 @@
-namespace AdventOfCode2020.App
+namespace AdventOfCode2020.App.Password
 {
     public class CharacterCountPolicyFactory : IPasswordPolicyFactory
     {

@@ -1,7 +1,7 @@
-using AdventOfCode2020.App;
+using AdventOfCode2020.App.Password;
 using NUnit.Framework;
 
-namespace AdventOfCode2020.Test
+namespace AdventOfCode2020.Test.Password
 {
     [TestFixture]
     public class CharacterPositionPolicyTest
