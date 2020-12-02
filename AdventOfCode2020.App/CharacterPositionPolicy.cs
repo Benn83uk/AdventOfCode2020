@@ -12,17 +12,6 @@ namespace AdventOfCode2020.App
             _character = character;
             _positions = positions;
         }
-        
-        public CharacterPositionPolicy(string policy)
-        {
-            var splitBySpace = policy.Split(' ');
-            var positions = splitBySpace[0];
-            _character = splitBySpace[1][0];
-            var positionsSplitByDash = positions.Split("-");
-            _positions = new int[2];
-            _positions[0] = int.Parse(positionsSplitByDash[0]);
-            _positions[1] = int.Parse(positionsSplitByDash[1]);
-        }
 
         public bool IsValid(string password)
         {
