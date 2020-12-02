@@ -21,5 +21,15 @@ namespace AdventOfCode2020.Test
             var password = new Password("aaaa", policy);
             Assert.That(password.IsValid(), Is.False);
         }
+        
+        [Test]
+        public void PasswordCreatedFromString()
+        {
+            var policy = new PasswordPolicy('a', 1, 3);
+            var expectedPassword = new Password("abcde", policy);
+            
+            var password = new Password("1-3 a: abcde");
+            Assert.That(password, Is.EqualTo(expectedPassword));
+        }
     }
 }

@@ -26,5 +26,13 @@ namespace AdventOfCode2020.Test
             var policy = new PasswordPolicy('c', 1, 3);
             Assert.That(policy.IsValid("abababa"), Is.False);
         }
+        
+        [Test]
+        public void PolicyCreatedFromString()
+        {
+            var expectedPolicy = new PasswordPolicy('a', 1, 3);
+            var policy = new PasswordPolicy("1-3 a");
+            Assert.That(policy, Is.EqualTo(expectedPolicy));
+        }
     }
 }

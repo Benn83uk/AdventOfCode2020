@@ -1,3 +1,5 @@
+using System;
+
 namespace AdventOfCode2020.App
 {
     public class PasswordPolicy
@@ -11,6 +13,16 @@ namespace AdventOfCode2020.App
             _character = character;
             _minAppearances = minAppearances;
             _maxAppearances = maxAppearances;
+        }
+
+        public PasswordPolicy(string policy)
+        {
+            var splitBySpace = policy.Split(' ');
+            var range = splitBySpace[0];
+            _character = splitBySpace[1][0];
+            var rangeSplitByDash = range.Split("-");
+            _minAppearances = int.Parse(rangeSplitByDash[0]);
+            _maxAppearances = int.Parse(rangeSplitByDash[1]);
         }
 
         public bool IsValid(string password)
@@ -28,6 +40,29 @@ namespace AdventOfCode2020.App
             }
 
             return characterCount;
+        }
+        
+        protected bool Equals(PasswordPolicy other)
+        {
+            return _character == other._character && _minAppearances == other._minAppearances && _maxAppearances == other._maxAppearances;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((PasswordPolicy) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_character, _minAppearances, _maxAppearances);
+        }
+
+        public override string ToString()
+        {
+            return $"{_minAppearances}-{_maxAppearances} {_character}";
         }
     }
 }
