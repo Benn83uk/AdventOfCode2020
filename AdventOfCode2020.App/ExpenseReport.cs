@@ -18,7 +18,7 @@ namespace AdventOfCode2020.App
             _expenses = ConvertToIntArray(lines);
         }
 
-        public int TwoEntriesWhichAddTo2020Multiplied()
+        public int ProductOfTwoEntriesWhichAddTo2020()
         {
             for (var a = 0; a < _expenses.Length-2; a++)
             {
@@ -35,7 +35,7 @@ namespace AdventOfCode2020.App
             return INVALID_RESULT;
         }
         
-        public int ThreeEntriesWhichAddTo2020Multiplied()
+        public int ProductOfThreeEntriesWhichAddTo2020()
         {
             for (var a = 0; a < _expenses.Length-3; a++)
             {
