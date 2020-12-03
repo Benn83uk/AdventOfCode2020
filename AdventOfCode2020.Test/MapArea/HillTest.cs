@@ -38,5 +38,12 @@ namespace AdventOfCode2020.Test.MapArea
             );
             Assert.That(hill.CountTreesOnSlope(1, 1), Is.EqualTo(2));
         }
+
+        [Test]
+        public void DayThreeExample()
+        {
+            var hill = new Hill("TestFiles/DayThreeExample.txt");
+            Assert.That(hill.CountTreesOnSlope(3, 1), Is.EqualTo(7));
+        }
     }
 }

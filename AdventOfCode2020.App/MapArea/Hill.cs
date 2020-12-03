@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace AdventOfCode2020.App.MapArea
 {
     public class Hill
@@ -7,6 +9,16 @@ namespace AdventOfCode2020.App.MapArea
         public Hill(params Slope[] slopes)
         {
             _slopes = slopes;
+        }
+
+        public Hill(string filePath)
+        {
+            var lines = File.ReadAllLines(filePath);
+            _slopes = new Slope[lines.Length];
+            for (var i = 0; i < lines.Length; i++)
+            {
+                _slopes[i] = new Slope(lines[i]);
+            }
         }
 
         public int CountTreesOnSlope(int right, int down)
