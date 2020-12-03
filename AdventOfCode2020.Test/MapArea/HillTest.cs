@@ -65,5 +65,18 @@ namespace AdventOfCode2020.Test.MapArea
             var diagonal = new Gradient(1, 1);
             Assert.That(hill.ProductOfTreesOnSlopes(straightDown, diagonal), Is.EqualTo(4));
         }
+        
+        [Test]
+        public void DayThreeTaskTwo()
+        {
+            var hill = new Hill("TestFiles/DayThreeInput.txt");
+            Assert.That(hill.ProductOfTreesOnSlopes(
+                new Gradient(1, 1),
+                new Gradient(3, 1),
+                new Gradient(5, 1),
+                new Gradient(7, 1),
+                new Gradient(1, 2)
+                ), Is.EqualTo(1478615040));
+        }
     }
 }
