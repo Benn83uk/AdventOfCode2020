@@ -52,5 +52,18 @@ namespace AdventOfCode2020.Test.MapArea
             var hill = new Hill("TestFiles/DayThreeInput.txt");
             Assert.That(hill.CountTreesOnSlope(new Gradient(3, 1)), Is.EqualTo(191));
         }
+
+        [Test]
+        public void ProductOfTreesOnSlopes()
+        {
+            var hill = new Hill(
+                new Slope("..#"),
+                new Slope("##."),
+                new Slope("#.#")
+            );
+            var straightDown = new Gradient(0, 1);
+            var diagonal = new Gradient(1, 1);
+            Assert.That(hill.ProductOfTreesOnSlopes(straightDown, diagonal), Is.EqualTo(4));
+        }
     }
 }

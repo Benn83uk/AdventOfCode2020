@@ -1,4 +1,5 @@
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace AdventOfCode2020.App.MapArea
 {
@@ -26,7 +27,7 @@ namespace AdventOfCode2020.App.MapArea
             return CountTreesOnSlope(g.Right, g.Down);
         }
 
-        public int CountTreesOnSlope(int right, int down)
+        private int CountTreesOnSlope(int right, int down)
         {
             var treeCount = 0;
             var x = 0;
@@ -36,6 +37,17 @@ namespace AdventOfCode2020.App.MapArea
                 x += right;
             }
             return treeCount;
+        }
+
+        public int ProductOfTreesOnSlopes(params Gradient[] gradients)
+        {
+            var product = CountTreesOnSlope(gradients[0]);
+            for (var i = 1; i < gradients.Length; i++)
+            {
+                product *= CountTreesOnSlope(gradients[i]);
+            }
+
+            return product;
         }
     }
 }
