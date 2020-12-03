@@ -14,7 +14,7 @@ namespace AdventOfCode2020.Test.MapArea
                 new Slope(".#."),
                 new Slope("..#")
             );
-            Assert.That(hill.CountTreesOnSlope(0, 1), Is.EqualTo(0));
+            Assert.That(hill.CountTreesOnSlope(new Gradient(0, 1)), Is.EqualTo(0));
         }
         
         [Test]
@@ -25,7 +25,7 @@ namespace AdventOfCode2020.Test.MapArea
                 new Slope(".#."),
                 new Slope("#.#")
             );
-            Assert.That(hill.CountTreesOnSlope(0, 1), Is.EqualTo(1));
+            Assert.That(hill.CountTreesOnSlope(new Gradient(0, 1)), Is.EqualTo(1));
         }
 
         [Test]
@@ -36,21 +36,21 @@ namespace AdventOfCode2020.Test.MapArea
                 new Slope(".#."),
                 new Slope("..#")
             );
-            Assert.That(hill.CountTreesOnSlope(1, 1), Is.EqualTo(2));
+            Assert.That(hill.CountTreesOnSlope(new Gradient(1, 1)), Is.EqualTo(2));
         }
 
         [Test]
         public void DayThreeExample()
         {
             var hill = new Hill("TestFiles/DayThreeExample.txt");
-            Assert.That(hill.CountTreesOnSlope(3, 1), Is.EqualTo(7));
+            Assert.That(hill.CountTreesOnSlope(new Gradient(3, 1)), Is.EqualTo(7));
         }
         
         [Test]
         public void DayThreeTaskOne()
         {
             var hill = new Hill("TestFiles/DayThreeInput.txt");
-            Assert.That(hill.CountTreesOnSlope(3, 1), Is.EqualTo(191));
+            Assert.That(hill.CountTreesOnSlope(new Gradient(3, 1)), Is.EqualTo(191));
         }
     }
 }

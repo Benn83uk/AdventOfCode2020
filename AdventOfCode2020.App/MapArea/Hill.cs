@@ -21,6 +21,11 @@ namespace AdventOfCode2020.App.MapArea
             }
         }
 
+        public int CountTreesOnSlope(Gradient g)
+        {
+            return CountTreesOnSlope(g.Right, g.Down);
+        }
+
         public int CountTreesOnSlope(int right, int down)
         {
             var treeCount = 0;
