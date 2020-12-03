@@ -35,7 +35,7 @@ namespace AdventOfCode2020.Test
         {
             var report = new ExpenseReport("TestFiles/DayOneInput.txt");
             var result = report.TwoEntriesWhichAddTo2020Multiplied();
-            //No assert (don't want to give away the answer)
+            Assert.That(result, Is.EqualTo(842016));
         }
         
         [Test]
@@ -51,7 +51,7 @@ namespace AdventOfCode2020.Test
         {
             var report = new ExpenseReport("TestFiles/DayOneInput.txt");
             var result = report.ThreeEntriesWhichAddTo2020Multiplied();
-            //No assert (don't want to give away the answer)
+            Assert.That(result, Is.EqualTo(9199664));
         }
     }
 }
