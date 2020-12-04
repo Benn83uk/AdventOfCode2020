@@ -34,12 +34,20 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateHeight()
         {
             if (_height.EndsWith("cm")) ValidateHeightInCM();
+            else if (_height.EndsWith("in")) ValidateHeightInInches();
+            else throw new InvalidCredentialFieldException();
         }
 
         private void ValidateHeightInCM()
         {
             var heightInCm = int.Parse(_height.Replace("cm", ""));
             if (heightInCm > 193 || heightInCm < 150) throw new InvalidCredentialFieldException();
+        }
+        
+        private void ValidateHeightInInches()
+        {
+            var heightInInches = int.Parse(_height.Replace("in", ""));
+            if (heightInInches > 59 || heightInInches < 76) throw new InvalidCredentialFieldException();
         }
     }
 }

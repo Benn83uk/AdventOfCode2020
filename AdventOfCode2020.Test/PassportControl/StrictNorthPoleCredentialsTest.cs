@@ -61,5 +61,26 @@ namespace AdventOfCode2020.Test.PassportControl
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2030, "149cm", "#ffffff", "amb", "012345678"));
         }
+        
+        [Test]
+        public void ErrorWhenHeightInInchesMoreThan76()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "77in", "#ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHeightInInchesLessThan59()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "58in", "#ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHeightNotCMOrInches()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "120na", "#ffffff", "amb", "012345678"));
+        }
     }
 }
