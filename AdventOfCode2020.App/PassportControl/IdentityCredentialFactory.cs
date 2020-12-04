@@ -81,5 +81,11 @@ namespace AdventOfCode2020.App.PassportControl
 
             return result.ToArray();
         }
+
+        public static int CountValidPassportsInFile(string filePath)
+        {
+            return CreateFromFile(filePath)
+                .Count(cred => cred is Passport || cred is NorthPoleCredentials);
+        }
     }
 }
