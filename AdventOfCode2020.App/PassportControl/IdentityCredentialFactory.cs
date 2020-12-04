@@ -11,7 +11,6 @@ namespace AdventOfCode2020.App.PassportControl
         public static IIdentityCredential Create(in string input)
         {
             var dictionary = CreateDictionary(input);
-
             return Create(dictionary);
         }
 
@@ -51,14 +50,11 @@ namespace AdventOfCode2020.App.PassportControl
                 return INVALID_CREDENTIALS;
             }
 
-            if (input.ContainsKey("cid"))
-            {
-                var countryId = input["cid"];
-                return new Passport(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId,
-                    countryId);
-            }
-
-            return new NorthPoleCredentials();
+            if (!input.ContainsKey("cid")) return new NorthPoleCredentials(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId);
+            
+            var countryId = input["cid"];
+            return new Passport(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId,
+                countryId);
         }
     }
 }
