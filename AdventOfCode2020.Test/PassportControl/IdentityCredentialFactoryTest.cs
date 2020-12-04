@@ -104,5 +104,12 @@ namespace AdventOfCode2020.Test.PassportControl
             var result = IdentityCredentialFactory.CountValidPassportsInFile("TestFiles/DayFourExample.txt");
             Assert.That(result, Is.EqualTo(2));
         }
+        
+        [Test]
+        public void DayOneTaskOneAnswer()
+        {
+            var result = IdentityCredentialFactory.CountValidPassportsInFile("TestFiles/DayFourInput.txt");
+            Assert.That(result, Is.EqualTo(235));
+        }
     }
 }
