@@ -13,6 +13,7 @@ namespace AdventOfCode2020.App.PassportControl
             ValidateBirthYear();
             ValidateIssueYear();
             ValidateExpirationYear();
+            ValidateHeight();
         }
 
         private void ValidateBirthYear()
@@ -28,6 +29,17 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateExpirationYear()
         {
             if (_expirationYear > 2030 || _expirationYear < 2020) throw new InvalidCredentialFieldException();
+        }
+
+        private void ValidateHeight()
+        {
+            if (_height.EndsWith("cm")) ValidateHeightInCM();
+        }
+
+        private void ValidateHeightInCM()
+        {
+            var heightInCm = int.Parse(_height.Replace("cm", ""));
+            if (heightInCm > 193 || heightInCm < 150) throw new InvalidCredentialFieldException();
         }
     }
 }

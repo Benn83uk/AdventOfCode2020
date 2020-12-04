@@ -7,45 +7,59 @@ namespace AdventOfCode2020.Test.PassportControl
     public class StrictNorthPoleCredentialsTest
     {
         [Test]
-        public void BirthYearAfter2002()
+        public void ErrorWhenBirthYearAfter2002()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(2003, 2010, 2020, "150cm", "#ffffff", "amb", "012345678"));
         }
         
         [Test]
-        public void BirthYearBefore1920()
+        public void ErrorWhenBirthYearBefore1920()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1919, 2010, 2020, "150cm", "#ffffff", "amb", "012345678"));
         }
         
         [Test]
-        public void IssueYearAfter2020()
+        public void ErrorWhenIssueYearAfter2020()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2021, 2020, "150cm", "#ffffff", "amb", "012345678"));
         }
         
         [Test]
-        public void IssueYearBefore2010()
+        public void ErrorWhenIssueYearBefore2010()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2009, 2020, "150cm", "#ffffff", "amb", "012345678"));
         }
 
         [Test]
-        public void ExpirationYearBefore2020()
+        public void ErrorWhenExpirationYearBefore2020()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2019, "150cm", "#ffffff", "amb", "012345678"));
         }
         
         [Test]
-        public void ExpirationYearAfter2030()
+        public void ErrorWhenExpirationYearAfter2030()
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2031, "150cm", "#ffffff", "amb", "012345678"));
+        }
+
+        [Test]
+        public void ErrorWhenHeightInCMMoreThan193()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "194cm", "#ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHeightInCMLessThan150()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "149cm", "#ffffff", "amb", "012345678"));
         }
     }
 }
