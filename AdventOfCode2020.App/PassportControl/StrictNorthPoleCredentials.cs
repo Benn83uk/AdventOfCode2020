@@ -1,9 +1,14 @@
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020.App.PassportControl
 {
     public class StrictNorthPoleCredentials : NorthPoleCredentials
     {
+        private static readonly string[] EyeColors = new[]
+        {
+            "amb", "blu", "brn", "gry", "grn", "hzl", "oth"
+        };
         public StrictNorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id) 
             : base(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, id)
         {
@@ -17,6 +22,7 @@ namespace AdventOfCode2020.App.PassportControl
             ValidateExpirationYear();
             ValidateHeight();
             ValidateHairColor();
+            ValidateEyeColor();
         }
 
         private void ValidateBirthYear()
@@ -56,6 +62,11 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateHairColor()
         {
             if (!Regex.IsMatch(_hairColor, "\\A#[a-f0-9]{6}\\Z")) throw new InvalidCredentialFieldException();
+        }
+
+        private void ValidateEyeColor()
+        {
+            if (!EyeColors.Contains(_eyeColor)) throw new InvalidCredentialFieldException();
         }
     }
 }

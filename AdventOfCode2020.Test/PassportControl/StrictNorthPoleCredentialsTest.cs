@@ -117,5 +117,12 @@ namespace AdventOfCode2020.Test.PassportControl
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00fffg", "amb", "012345678"));
         }
+        
+        [Test]
+        public void ErrorWhenEyeColorDoesNotAnOption()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00ffff", "zzz", "012345678"));
+        }
     }
 }

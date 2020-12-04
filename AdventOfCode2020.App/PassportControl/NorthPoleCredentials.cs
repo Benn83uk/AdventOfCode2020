@@ -10,7 +10,7 @@ namespace AdventOfCode2020.App.PassportControl
         protected readonly int _expirationYear;
         protected readonly string _height;
         protected readonly string _hairColor;
-        private readonly string _eyeColor;
+        protected readonly string _eyeColor;
         private readonly string _id;
 
         public NorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor,
