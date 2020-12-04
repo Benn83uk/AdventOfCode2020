@@ -11,14 +11,9 @@ namespace AdventOfCode2020.App.PassportControl
         private readonly string _hairColor;
         private readonly string _eyeColor;
         private readonly string _id;
-        private readonly int _countryId;
+        private readonly string _countryId;
 
-
-        public Passport()
-        {
-        }
-
-        public Passport(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id, int countryId)
+        public Passport(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id, string countryId)
         {
             _birthYear = birthYear;
             _issueYear = issueYear;
