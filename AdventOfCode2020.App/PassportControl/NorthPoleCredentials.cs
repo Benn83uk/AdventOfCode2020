@@ -11,10 +11,10 @@ namespace AdventOfCode2020.App.PassportControl
         protected readonly string _height;
         protected readonly string _hairColor;
         protected readonly string _eyeColor;
-        private readonly string _id;
+        protected readonly string _passportId;
 
         public NorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor,
-            string eyeColor, string id)
+            string eyeColor, string passportId)
         {
             _birthYear = birthYear;
             _issueYear = issueYear;
@@ -22,7 +22,7 @@ namespace AdventOfCode2020.App.PassportControl
             _height = height;
             _hairColor = hairColor;
             _eyeColor = eyeColor;
-            _id = id;
+            _passportId = passportId;
         }
 
         protected bool Equals(NorthPoleCredentials other)
@@ -33,7 +33,7 @@ namespace AdventOfCode2020.App.PassportControl
                    _height == other._height && 
                    _hairColor == other._hairColor && 
                    _eyeColor == other._eyeColor && 
-                   _id == other._id;
+                   _passportId == other._passportId;
         }
 
         public override bool Equals(object obj)
@@ -46,7 +46,7 @@ namespace AdventOfCode2020.App.PassportControl
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_birthYear, _issueYear, _expirationYear, _height, _hairColor, _eyeColor, _id);
+            return HashCode.Combine(_birthYear, _issueYear, _expirationYear, _height, _hairColor, _eyeColor, _passportId);
         }
 
         public override string ToString()
@@ -57,7 +57,7 @@ namespace AdventOfCode2020.App.PassportControl
                    $"hgt:{_height} " +
                    $"hcl:{_hairColor} " +
                    $"ecl:{_eyeColor} " +
-                   $"pid:{_id} ";
+                   $"pid:{_passportId} ";
         }
     }
 }

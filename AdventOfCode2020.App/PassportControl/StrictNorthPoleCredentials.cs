@@ -9,8 +9,8 @@ namespace AdventOfCode2020.App.PassportControl
         {
             "amb", "blu", "brn", "gry", "grn", "hzl", "oth"
         };
-        public StrictNorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id) 
-            : base(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, id)
+        public StrictNorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string passportId) 
+            : base(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId)
         {
             Validate();
         }
@@ -23,6 +23,7 @@ namespace AdventOfCode2020.App.PassportControl
             ValidateHeight();
             ValidateHairColor();
             ValidateEyeColor();
+            ValidatePassportId();
         }
 
         private void ValidateBirthYear()
@@ -56,7 +57,7 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateHeightInInches()
         {
             var heightInInches = int.Parse(_height.Replace("in", ""));
-            if (heightInInches > 59 || heightInInches < 76) throw new InvalidCredentialFieldException();
+            if (heightInInches > 76 || heightInInches < 59) throw new InvalidCredentialFieldException();
         }
 
         private void ValidateHairColor()
@@ -67,6 +68,11 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateEyeColor()
         {
             if (!EyeColors.Contains(_eyeColor)) throw new InvalidCredentialFieldException();
+        }
+
+        private void ValidatePassportId()
+        {
+            if (!Regex.IsMatch(_passportId, "\\A[0-9]{9}\\Z")) throw new InvalidCredentialFieldException();
         }
     }
 }

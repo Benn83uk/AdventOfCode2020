@@ -40,7 +40,7 @@ namespace AdventOfCode2020.Test.PassportControl
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2019, "150cm", "#ffffff", "amb", "012345678"));
         }
-        
+
         [Test]
         public void ErrorWhenExpirationYearAfter2030()
         {
@@ -123,6 +123,34 @@ namespace AdventOfCode2020.Test.PassportControl
         {
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00ffff", "zzz", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenPassportIdIsNotANumber()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00ffff", "brn", "abcabcabc"));
+        }
+        
+        [Test]
+        public void ErrorWhenPassportIdLessThan9Chars()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00ffff", "brn", "01234567"));
+        }
+        
+        [Test]
+        public void ErrorWhenPassportIdGreaterThan9Chars()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00ffff", "brn", "0123456789"));
+        }
+        
+        [Test]
+        public void ErrorWhenUsingDayFourTaskTwoExample()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1946, 2019, 1967, "170cm", "#602927", "grn", "012533040"));
         }
     }
 }

@@ -2,12 +2,12 @@ using System;
 
 namespace AdventOfCode2020.App.PassportControl
 {
-    public class Passport : NorthPoleCredentials
+    public class Passport : StrictNorthPoleCredentials
     {
         private readonly string _countryId;
 
-        public Passport(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id, string countryId)
-        : base(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, id)
+        public Passport(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string passportId, string countryId)
+        : base(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId)
         {
             _countryId = countryId;
         }

@@ -51,12 +51,31 @@ namespace AdventOfCode2020.App.PassportControl
             {
                 return INVALID_CREDENTIALS;
             }
-            
-            if (!input.ContainsKey("cid")) return new NorthPoleCredentials(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId);
-            
+
+            if (!input.ContainsKey("cid"))
+            {
+                try
+                {
+                    return new StrictNorthPoleCredentials(birthYear, issueYear, expirationYear, height, hairColor,
+                        eyeColor,
+                        passportId);
+                }
+                catch (InvalidCredentialFieldException)
+                {
+                    return INVALID_CREDENTIALS;
+                }
+            }
+
             var countryId = input["cid"];
-            return new Passport(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId,
-                countryId);
+            try
+            {
+                return new Passport(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId,
+                    countryId);
+            }
+            catch (InvalidCredentialFieldException)
+            {
+                return INVALID_CREDENTIALS;
+            }
         }
 
         public static IIdentityCredential[] CreateFromFile(string filePath)
@@ -85,7 +104,7 @@ namespace AdventOfCode2020.App.PassportControl
         public static int CountValidPassportsInFile(string filePath)
         {
             return CreateFromFile(filePath)
-                .Count(cred => cred is Passport || cred is NorthPoleCredentials);
+                .Count(cred => cred is Passport || cred is StrictNorthPoleCredentials);
         }
     }
 }
