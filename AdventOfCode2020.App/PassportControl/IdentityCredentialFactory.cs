@@ -51,7 +51,7 @@ namespace AdventOfCode2020.App.PassportControl
             {
                 return INVALID_CREDENTIALS;
             }
-
+            
             if (!input.ContainsKey("cid")) return new NorthPoleCredentials(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId);
             
             var countryId = input["cid"];

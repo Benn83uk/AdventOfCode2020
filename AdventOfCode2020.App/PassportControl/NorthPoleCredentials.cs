@@ -1,18 +1,20 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AdventOfCode2020.App.PassportControl
 {
     public class NorthPoleCredentials : IIdentityCredential
     {
-        private readonly int _birthYear;
-        private readonly int _issueYear;
+        protected readonly int _birthYear;
+        protected readonly int _issueYear;
         private readonly int _expirationYear;
         private readonly string _height;
         private readonly string _hairColor;
         private readonly string _eyeColor;
         private readonly string _id;
 
-        public NorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor, string eyeColor, string id)
+        public NorthPoleCredentials(int birthYear, int issueYear, int expirationYear, string height, string hairColor,
+            string eyeColor, string id)
         {
             _birthYear = birthYear;
             _issueYear = issueYear;
@@ -22,7 +24,7 @@ namespace AdventOfCode2020.App.PassportControl
             _eyeColor = eyeColor;
             _id = id;
         }
-        
+
         protected bool Equals(NorthPoleCredentials other)
         {
             return _birthYear == other._birthYear && 
