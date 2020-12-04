@@ -82,5 +82,40 @@ namespace AdventOfCode2020.Test.PassportControl
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2010, 2030, "120na", "#ffffff", "amb", "012345678"));
         }
+
+        [Test]
+        public void ErrorWhenHairColorDoesNotStartWithHash()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHairColorDoesNotStartWithHashButDoesContainOne()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "f#ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHairColorTooShort()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#fffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHairColorTooLong()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#fffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ErrorWhenHairColorDoesNotCorrectFormat()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2030, "150cm", "#00fffg", "amb", "012345678"));
+        }
     }
 }

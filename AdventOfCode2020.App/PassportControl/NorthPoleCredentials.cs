@@ -9,7 +9,7 @@ namespace AdventOfCode2020.App.PassportControl
         protected readonly int _issueYear;
         protected readonly int _expirationYear;
         protected readonly string _height;
-        private readonly string _hairColor;
+        protected readonly string _hairColor;
         private readonly string _eyeColor;
         private readonly string _id;
 

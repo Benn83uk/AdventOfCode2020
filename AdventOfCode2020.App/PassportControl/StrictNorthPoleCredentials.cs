@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace AdventOfCode2020.App.PassportControl
 {
     public class StrictNorthPoleCredentials : NorthPoleCredentials
@@ -14,6 +16,7 @@ namespace AdventOfCode2020.App.PassportControl
             ValidateIssueYear();
             ValidateExpirationYear();
             ValidateHeight();
+            ValidateHairColor();
         }
 
         private void ValidateBirthYear()
@@ -48,6 +51,11 @@ namespace AdventOfCode2020.App.PassportControl
         {
             var heightInInches = int.Parse(_height.Replace("in", ""));
             if (heightInInches > 59 || heightInInches < 76) throw new InvalidCredentialFieldException();
+        }
+
+        private void ValidateHairColor()
+        {
+            if (!Regex.IsMatch(_hairColor, "\\A#[a-f0-9]{6}\\Z")) throw new InvalidCredentialFieldException();
         }
     }
 }
