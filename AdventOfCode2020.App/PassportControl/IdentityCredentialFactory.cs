@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace AdventOfCode2020.App.PassportControl
@@ -18,6 +19,7 @@ namespace AdventOfCode2020.App.PassportControl
         {
             return input
                 .Replace(Environment.NewLine, " ")
+                .Trim()
                 .Split(' ')
                 .Select(str => str.Split(':'))
                 .ToDictionary(
@@ -55,6 +57,29 @@ namespace AdventOfCode2020.App.PassportControl
             var countryId = input["cid"];
             return new Passport(birthYear, issueYear, expirationYear, height, hairColor, eyeColor, passportId,
                 countryId);
+        }
+
+        public static IIdentityCredential[] CreateFromFile(string filePath)
+        {
+            var result = new List<IIdentityCredential>();
+            var lines = File.ReadAllLines(filePath);
+            var currentInput = lines[0];
+            for (var  i = 1;  i < lines.Length;  i++)
+            {
+                if (string.IsNullOrWhiteSpace(lines[i]))
+                {
+                    result.Add(Create(currentInput));
+                    currentInput = "";
+                }
+                else
+                {
+                    currentInput = currentInput + " " + lines[i];
+                }
+            }
+            
+            if (!string.IsNullOrWhiteSpace(currentInput)) result.Add(Create(currentInput));
+
+            return result.ToArray();
         }
     }
 }

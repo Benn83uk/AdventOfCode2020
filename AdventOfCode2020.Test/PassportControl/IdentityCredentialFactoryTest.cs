@@ -83,5 +83,19 @@ namespace AdventOfCode2020.Test.PassportControl
             var result = IdentityCredentialFactory.Create(inputString);
             Assert.That(result, Is.EqualTo(IdentityCredentialFactory.INVALID_CREDENTIALS));
         }
+
+        [Test]
+        public void CanCreateCredentialsFromFile()
+        {
+            var expected = new IIdentityCredential[]
+            {
+                new Passport(1937, 2017, 2020, "183cm", "#fffffd", "gry", "860033327", "147"),
+                IdentityCredentialFactory.INVALID_CREDENTIALS, 
+                new NorthPoleCredentials(1931, 2013, 2024, "179cm", "#ae17e1", "brn", "760753108"),
+                IdentityCredentialFactory.INVALID_CREDENTIALS
+            };
+            var result = IdentityCredentialFactory.CreateFromFile("TestFiles/DayFourExample.txt");
+            Assert.That(result, Is.EquivalentTo(expected));
+        }
     }
 }

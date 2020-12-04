@@ -46,5 +46,16 @@ namespace AdventOfCode2020.App.PassportControl
         {
             return HashCode.Combine(_birthYear, _issueYear, _expirationYear, _height, _hairColor, _eyeColor, _id);
         }
+
+        public override string ToString()
+        {
+            return $"byr:{_birthYear} " +
+                   $"iyr:{_issueYear} " +
+                   $"eyr:{_expirationYear} " +
+                   $"hgt:{_height} " +
+                   $"hcl:{_hairColor} " +
+                   $"ecl:{_eyeColor} " +
+                   $"pid:{_id} ";
+        }
     }
 }
