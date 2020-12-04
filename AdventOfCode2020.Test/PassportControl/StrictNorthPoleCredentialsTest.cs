@@ -33,5 +33,19 @@ namespace AdventOfCode2020.Test.PassportControl
             Assert.Throws<InvalidCredentialFieldException>(
                 () => new StrictNorthPoleCredentials(1920, 2009, 2020, "150cm", "#ffffff", "amb", "012345678"));
         }
+
+        [Test]
+        public void ExpirationYearBefore2020()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2019, "150cm", "#ffffff", "amb", "012345678"));
+        }
+        
+        [Test]
+        public void ExpirationYearAfter2030()
+        {
+            Assert.Throws<InvalidCredentialFieldException>(
+                () => new StrictNorthPoleCredentials(1920, 2010, 2031, "150cm", "#ffffff", "amb", "012345678"));
+        }
     }
 }

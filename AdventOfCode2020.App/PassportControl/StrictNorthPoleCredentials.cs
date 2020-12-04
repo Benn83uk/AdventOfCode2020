@@ -12,6 +12,7 @@ namespace AdventOfCode2020.App.PassportControl
         {
             ValidateBirthYear();
             ValidateIssueYear();
+            ValidateExpirationYear();
         }
 
         private void ValidateBirthYear()
@@ -22,6 +23,11 @@ namespace AdventOfCode2020.App.PassportControl
         private void ValidateIssueYear()
         {
             if (_issueYear > 2020 || _issueYear < 2010) throw new InvalidCredentialFieldException();
+        }
+        
+        private void ValidateExpirationYear()
+        {
+            if (_expirationYear > 2030 || _expirationYear < 2020) throw new InvalidCredentialFieldException();
         }
     }
 }
