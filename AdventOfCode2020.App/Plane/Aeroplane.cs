@@ -35,7 +35,11 @@ namespace AdventOfCode2020.App.Plane
                 {
                     Console.WriteLine($"Checking row: {row}, column: {col}");
                     var expectedSeatId = (row * 8) + col;
-                    if (!seatIds.Contains(expectedSeatId)) return expectedSeatId;
+                    if (
+                        !seatIds.Contains(expectedSeatId) &&
+                        seatIds.Contains(expectedSeatId-1) &&
+                        seatIds.Contains(expectedSeatId+1)
+                    ) return expectedSeatId;
                 }
             }
 

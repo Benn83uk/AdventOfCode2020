@@ -33,27 +33,10 @@ namespace AdventOfCode2020.Test.Plane
         }
 
         [Test]
-        public void FindMissingSeat()
+        public void DayFiveTaskTwoAnswer()
         {
-            var plane = new Aeroplane(
-                new Seat("FFFL"), //Very front row
-                //new Seat("FFFR"), //Very front row, missing
-                new Seat("FFBL"), //Row 1
-                new Seat("FFBR"),
-                new Seat("FBFL"),  //Row 2
-                new Seat("FBFR"),
-                new Seat("FBBL"),  //Row 3
-                new Seat("FBBR"),
-                new Seat("BFFL"),  //Row 4
-                //new Seat("BFFR"), //Our missing seat, Row 4, Column 1, Id 4*8+1 = 33
-                new Seat("BFBL"),  //Row 5
-                new Seat("BFBR"),
-                new Seat("BBFL"),
-                new Seat("BBFR"),
-                //new Seat("BBBL"), // Very back row, missing
-                new Seat("BBBR")
-            );
-            Assert.That(plane.MissingSeatId(), Is.EqualTo(33));
+            var plane = new Aeroplane("TestFiles/DayFiveInput.txt");
+            Assert.That(plane.MissingSeatId(), Is.EqualTo(548));
         }
     }
 }
