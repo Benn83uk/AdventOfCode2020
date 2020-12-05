@@ -1,3 +1,5 @@
+using System;
+
 namespace AdventOfCode2020.App.Plane
 {
     public class Seat
@@ -11,7 +13,10 @@ namespace AdventOfCode2020.App.Plane
 
         public int Row()
         {
-            return _reference.Equals("F") ? 0 : 1;
+            var refAsBinaryString = _reference
+                .Replace("F", "0")
+                .Replace("B", "1");
+            return Convert.ToInt32(refAsBinaryString, 2);
         }
     }
 }
