@@ -4,19 +4,19 @@ namespace AdventOfCode2020.App.Plane
 {
     public class Seat
     {
-        private readonly string _reference;
+        private readonly string _row;
 
         public Seat(string reference)
         {
-            _reference = reference;
+            _row = reference;
         }
 
         public int Row()
         {
-            var refAsBinaryString = _reference
+            var rowAsBinaryString = _row
                 .Replace("F", "0")
                 .Replace("B", "1");
-            return Convert.ToInt32(refAsBinaryString, 2);
+            return Convert.ToInt32(rowAsBinaryString, 2);
         }
     }
 }
