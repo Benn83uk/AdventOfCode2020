@@ -119,6 +119,25 @@ namespace AdventOfCode2020.Test.Plane
             var seat = new Seat("BFFFBBFRRR");
             Assert.That(seat.Row(), Is.EqualTo(70));
             Assert.That(seat.Column(), Is.EqualTo(7));
+            Assert.That(seat.Id(), Is.EqualTo(567));
+        }
+
+        [Test]
+        public void DayFiveTaskOneExampleTwo()
+        {
+            var seat = new Seat("FFFBBBFRRR");
+            Assert.That(seat.Row(), Is.EqualTo(14));
+            Assert.That(seat.Column(), Is.EqualTo(7));
+            Assert.That(seat.Id(), Is.EqualTo(119));
+        }
+        
+        [Test]
+        public void DayFiveTaskOneExampleThree()
+        {
+            var seat = new Seat("BBFFBBFRLL");
+            Assert.That(seat.Row(), Is.EqualTo(102));
+            Assert.That(seat.Column(), Is.EqualTo(4));
+            Assert.That(seat.Id(), Is.EqualTo(820));
         }
     }
 }
