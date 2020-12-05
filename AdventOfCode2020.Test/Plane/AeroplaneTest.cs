@@ -17,5 +17,12 @@ namespace AdventOfCode2020.Test.Plane
                 );
             Assert.That(plane.HighestSeatId(), Is.EqualTo(18));
         }
+        
+        [Test]
+        public void DayFiveTaskOneExampleFromFile()
+        {
+            var plane = new Aeroplane("TestFiles/DayFiveExample.txt");
+            Assert.That(plane.HighestSeatId(), Is.EqualTo(820));
+        }
     }
 }
