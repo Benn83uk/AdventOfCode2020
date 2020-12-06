@@ -7,10 +7,17 @@ namespace AdventOfCode2020.Test.Customs
     public class PassengerGroupTest
     {
         [Test]
-        public void OnePersonOneGroupOneAnswer()
+        public void OnePersonOneAnswer()
         {
             var list = new PassengerGroup("a");
             Assert.That(list.CountUniqueAnswers(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void OnePersonTwoAnswers()
+        {
+            var list = new PassengerGroup("ab");
+            Assert.That(list.CountUniqueAnswers(), Is.EqualTo(2));
         }
     }
 }

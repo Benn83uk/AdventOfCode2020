@@ -10,7 +10,7 @@ namespace AdventOfCode2020.App.Customs
 
         public int CountUniqueAnswers()
         {
-            return 1;
+            return _groupAnswers[0].Length;
         }
     }
 }
