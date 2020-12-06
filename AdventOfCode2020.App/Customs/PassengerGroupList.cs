@@ -44,5 +44,10 @@ namespace AdventOfCode2020.App.Customs
         {
             return _passengerGroups.Sum(g => g.CountUniqueAnswers());
         }
+
+        public int SumSameAnswers()
+        {
+            return _passengerGroups.Sum(g => g.CountSameAnswers());
+        }
     }
 }
