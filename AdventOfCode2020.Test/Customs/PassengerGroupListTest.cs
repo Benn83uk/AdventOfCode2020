@@ -24,7 +24,7 @@ namespace AdventOfCode2020.Test.Customs
         }
         
         [Test]
-        public void DayOneExample()
+        public void DaySixExample()
         {
             var list = new PassengerGroupList(
                 new PassengerGroup("abc"),
