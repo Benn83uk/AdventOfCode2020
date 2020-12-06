@@ -35,5 +35,12 @@ namespace AdventOfCode2020.Test.Customs
             );
             Assert.That(list.SumUniqueAnswers(), Is.EqualTo(11));
         }
+        
+        [Test]
+        public void DaySixExampleFromFile()
+        {
+            var list = new PassengerGroupList("TestFiles/DaySixExample.txt");
+            Assert.That(list.SumUniqueAnswers(), Is.EqualTo(11));
+        }
     }
 }
