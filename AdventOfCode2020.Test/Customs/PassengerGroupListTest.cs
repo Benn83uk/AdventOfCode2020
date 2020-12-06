@@ -22,5 +22,18 @@ namespace AdventOfCode2020.Test.Customs
                 );
             Assert.That(list.SumUniqueAnswers(), Is.EqualTo(10));
         }
+        
+        [Test]
+        public void DayOneExample()
+        {
+            var list = new PassengerGroupList(
+                new PassengerGroup("abc"),
+                new PassengerGroup("a", "b", "c"),
+                new PassengerGroup("ab", "ac"),
+                new PassengerGroup("a", "a", "a", "a"),
+                new PassengerGroup("b")
+            );
+            Assert.That(list.SumUniqueAnswers(), Is.EqualTo(11));
+        }
     }
 }
