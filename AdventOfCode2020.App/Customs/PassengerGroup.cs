@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace AdventOfCode2020.App.Customs
 {
     public class PassengerGroup
@@ -10,7 +12,15 @@ namespace AdventOfCode2020.App.Customs
 
         public int CountUniqueAnswers()
         {
-            return _groupAnswers[0].Length;
+            var uniqueAnswers = new List<char>();
+            foreach (var personAnswers in _groupAnswers)
+            {
+                foreach (var answer in personAnswers)
+                {
+                    if (!uniqueAnswers.Contains(answer)) uniqueAnswers.Add(answer);
+                }
+            }
+            return uniqueAnswers.Count;
         }
     }
 }
