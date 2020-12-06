@@ -56,5 +56,12 @@ namespace AdventOfCode2020.Test.Customs
             var list = new PassengerGroupList("TestFiles/DaySixExample.txt");
             Assert.That(list.SumSameAnswers(), Is.EqualTo(6));
         }
+        
+        [Test]
+        public void DaySixTaskTwoAnswer()
+        {
+            var list = new PassengerGroupList("TestFiles/DaySixInput.txt");
+            Assert.That(list.SumSameAnswers(), Is.EqualTo(3382));
+        }
     }
 }
