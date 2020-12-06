@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020.App.Customs
 {
@@ -21,6 +22,22 @@ namespace AdventOfCode2020.App.Customs
                 }
             }
             return uniqueAnswers.Count;
+        }
+
+        public int CountSameAnswers()
+        {
+            var answerCount = new Dictionary<char, int>();
+            foreach (var personAnswers in _groupAnswers)
+            {
+                foreach (var answer in personAnswers)
+                {
+                    if (answerCount.ContainsKey(answer)) answerCount[answer]++;
+                    else answerCount.Add(answer, 1);
+                }
+            }
+
+            var numPeople = _groupAnswers.Length;
+            return answerCount.Count(kvp => kvp.Value == numPeople);
         }
     }
 }

@@ -40,5 +40,12 @@ namespace AdventOfCode2020.Test.Customs
             var group = new PassengerGroup("abcx", "abcy", "abcz");
             Assert.That(group.CountUniqueAnswers(), Is.EqualTo(6));
         }
+        
+        [Test]
+        public void ThreePeopleDifferentAnswersEveryoneAnsweredThree()
+        {
+            var group = new PassengerGroup("abcx", "abcy", "abcz");
+            Assert.That(group.CountSameAnswers(), Is.EqualTo(3));
+        }
     }
 }
