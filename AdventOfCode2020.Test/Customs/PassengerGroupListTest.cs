@@ -12,5 +12,15 @@ namespace AdventOfCode2020.Test.Customs
             var list = new PassengerGroupList(new PassengerGroup("abcx", "abcy"));
             Assert.That(list.SumUniqueAnswers(), Is.EqualTo(5));
         }
+        
+        [Test]
+        public void TwoGroupSumCorrectly()
+        {
+            var list = new PassengerGroupList(
+                new PassengerGroup("abcx", "abcy"),
+                    new PassengerGroup("abcx", "abcy")
+                );
+            Assert.That(list.SumUniqueAnswers(), Is.EqualTo(10));
+        }
     }
 }

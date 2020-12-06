@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace AdventOfCode2020.App.Customs
 {
     public class PassengerGroupList
@@ -10,7 +12,7 @@ namespace AdventOfCode2020.App.Customs
 
         public int SumUniqueAnswers()
         {
-            return _passengerGroups[0].CountUniqueAnswers();
+            return _passengerGroups.Sum(g => g.CountUniqueAnswers());
         }
     }
 }
