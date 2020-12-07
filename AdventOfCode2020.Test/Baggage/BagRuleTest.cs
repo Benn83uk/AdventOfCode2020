@@ -1,4 +1,6 @@
+using System.IO;
 using AdventOfCode2020.App.Baggage;
+using Castle.DynamicProxy.Generators;
 using NUnit.Framework;
 
 namespace AdventOfCode2020.Test.Baggage
@@ -132,6 +134,40 @@ namespace AdventOfCode2020.Test.Baggage
             root.AddRule(dottedBlackBag);
             root.AddRule(fadedBlueBag);
             root.AddRule(vibrantPlumBag);
+            Assert.That(root.NumBagsFor("shiny gold")-1, Is.EqualTo(4));
+        }
+        
+        [Test]
+        public void CanCreateSimpleRuleFromSentence()
+        {
+            var expected = new BagRule("ROOT");
+            var blackBag = new BagRule("dotted black");
+            expected.AddRule(blackBag);
+            
+            var bagRules = BagRule.Create("dotted black bags contain no other bags.");
+            Assert.That(bagRules, Is.EqualTo(expected));
+        }
+        
+        [Test]
+        public void CanCreateSimpleRuleFromMultipleSentences()
+        {
+            var expected = new BagRule("ROOT");
+            var blueBag = new BagRule("blue");
+            expected.AddRule(blueBag);
+            var blackBag = new BagRule("dotted black");
+            expected.AddRule(blackBag);
+
+            var bagRules = BagRule.Create(
+                "blue bags contain no other bags",
+                "dotted black bags contain no other bags.");
+            Assert.That(bagRules, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void DaySevenExampleFromFile()
+        {
+            var lines = File.ReadAllLines("TestFiles/DaySevenExample.txt");
+            var root = BagRule.Create(lines);
             Assert.That(root.NumBagsFor("shiny gold")-1, Is.EqualTo(4));
         }
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020.App.Baggage
 {
@@ -72,6 +73,47 @@ namespace AdventOfCode2020.App.Baggage
             }
 
             return currentValid;
+        }
+        
+        public static BagRule Create(params string[] ruleStr)
+        {
+            var rulesList = new List<BagRule>();
+            
+            foreach(var rule in ruleStr)
+            {
+                var matchColor = Regex.Match(rule, "(?<color>.*?) bags contain");
+                var color = matchColor.Groups["color"].Value;
+                var currentBag = new BagRule(color);
+                rulesList.Add(currentBag);
+            }
+            
+            foreach(var rule in ruleStr)
+            {
+                var matchNoChildren = Regex.Match(rule, "bags contain no other bags");
+                if (matchNoChildren.Success)
+                {
+                    continue;
+                }
+                
+                var matchColor = Regex.Match(rule, "(?<color>.*?) bags contain");
+                var color = matchColor.Groups["color"].Value;
+                var currentBag = rulesList.First(b => b._color == color);
+
+                var ruleChildren = rule.Replace(matchColor.Value, "");
+
+                var matchChildren = Regex.Match(rule, "bags contain (?<number>[0-9]*?) (?<color>.*?) bag");
+                var childColor = matchChildren.Groups["color"].Value;
+                var childBag = rulesList.First(b => b._color == childColor);
+                currentBag.AddRule(childBag);
+            }
+            
+            var root = new BagRule("ROOT");
+            foreach (var rule in rulesList)
+            {
+                root.AddRule(rule);
+            }
+
+            return root;
         }
     }
 }
