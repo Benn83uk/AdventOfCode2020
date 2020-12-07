@@ -205,5 +205,16 @@ namespace AdventOfCode2020.Test.Baggage
             var root = BagRule.Create(lines);
             Assert.That(root.NumBagsFor("shiny gold"), Is.EqualTo(164));
         }
+        
+        [Test]
+        public void NumBagsRequiredSimple()
+        {
+            var whiteBag = new BagRule("Bright White");
+            var blueBag = new BagRule("Faded Blue");
+            whiteBag.AddRule(blueBag, 2);
+            var yellowBag = new BagRule("Muted Yellow");
+            blueBag.AddRule(yellowBag, 3);
+            Assert.That(whiteBag.BagsRequired(), Is.EqualTo(8)); // 2 blue + 2 * 3 yellow
+        }
     }
 }

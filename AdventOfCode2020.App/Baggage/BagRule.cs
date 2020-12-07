@@ -24,7 +24,7 @@ namespace AdventOfCode2020.App.Baggage
 
         public void AddRule(BagRule rule, int numBags)
         {
-            _children.Add(rule, 0);
+            _children.Add(rule, numBags);
         }
 
         public bool CanContain(string color)
@@ -129,6 +129,25 @@ namespace AdventOfCode2020.App.Baggage
             }
 
             return root;
+        }
+
+        public int BagsRequired()
+        {
+            return BagsRequired(new List<BagRule>());
+        }
+        
+        private int BagsRequired(List<BagRule> visitedRules)
+        {
+            if (visitedRules.Contains(this)) return 0;
+            visitedRules.Add(this);
+    
+            var bagsInsideThisBag = 0;
+            foreach (var child in _children)
+            {
+                bagsInsideThisBag += child.Value + (child.Value * child.Key.BagsRequired(visitedRules));
+            }
+
+            return bagsInsideThisBag;
         }
     }
 }
