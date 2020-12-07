@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020.App.Baggage
@@ -117,8 +118,9 @@ namespace AdventOfCode2020.App.Baggage
                 foreach (Match matchChild in matchChildren)
                 {
                     var childColor = matchChild.Groups["color"].Value;
+                    var numChildren = int.Parse(matchChild.Groups["number"].Value);
                     var childBag = rulesList.First(b => b._color == childColor);
-                    currentBag.AddRule(childBag);
+                    currentBag.AddRule(childBag, numChildren);
                 }
             }
             
@@ -148,6 +150,12 @@ namespace AdventOfCode2020.App.Baggage
             }
 
             return bagsInsideThisBag;
+        }
+
+        public int BagsRequiredFor(string color)
+        {
+            var bag = _children.Keys.First(child => child._color.Equals(color));
+            return bag.BagsRequired();
         }
     }
 }

@@ -216,5 +216,13 @@ namespace AdventOfCode2020.Test.Baggage
             blueBag.AddRule(yellowBag, 3);
             Assert.That(whiteBag.BagsRequired(), Is.EqualTo(8)); // 2 blue + 2 * 3 yellow
         }
+        
+        [Test]
+        public void DaySevenExampleCountBags()
+        {
+            var lines = File.ReadAllLines("TestFiles/DaySevenExample.txt");
+            var root = BagRule.Create(lines);
+            Assert.That(root.BagsRequiredFor("shiny gold"), Is.EqualTo(32));
+        }
     }
 }
