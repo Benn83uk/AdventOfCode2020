@@ -19,6 +19,11 @@ namespace AdventOfCode2020.App.Baggage
 
         public void AddRule(BagRule rule)
         {
+            AddRule(rule, 0);
+        }
+
+        public void AddRule(BagRule rule, int numBags)
+        {
             _children.Add(rule, 0);
         }
 
