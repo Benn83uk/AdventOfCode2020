@@ -224,5 +224,21 @@ namespace AdventOfCode2020.Test.Baggage
             var root = BagRule.Create(lines);
             Assert.That(root.BagsRequiredFor("shiny gold"), Is.EqualTo(32));
         }
+        
+        [Test]
+        public void DaySevenExample2CountBags()
+        {
+            var lines = File.ReadAllLines("TestFiles/DaySevenExample2.txt");
+            var root = BagRule.Create(lines);
+            Assert.That(root.BagsRequiredFor("shiny gold"), Is.EqualTo(126));
+        }
+        
+        [Test]
+        public void DaySevenTaskTwoAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DaySevenInput.txt");
+            var root = BagRule.Create(lines);
+            Assert.That(root.BagsRequiredFor("shiny gold"), Is.EqualTo(7872));
+        }
     }
 }

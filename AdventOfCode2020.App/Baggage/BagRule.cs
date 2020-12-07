@@ -135,18 +135,10 @@ namespace AdventOfCode2020.App.Baggage
 
         public int BagsRequired()
         {
-            return BagsRequired(new List<BagRule>());
-        }
-        
-        private int BagsRequired(List<BagRule> visitedRules)
-        {
-            if (visitedRules.Contains(this)) return 0;
-            visitedRules.Add(this);
-    
             var bagsInsideThisBag = 0;
             foreach (var child in _children)
             {
-                bagsInsideThisBag += child.Value + (child.Value * child.Key.BagsRequired(visitedRules));
+                bagsInsideThisBag += child.Value + (child.Value * child.Key.BagsRequired());
             }
 
             return bagsInsideThisBag;
