@@ -19,5 +19,12 @@ namespace AdventOfCode2020.Test.Baggage
             var bag = new BagRule("White", "Blue");
             Assert.That(bag.CanContain("Muted Yellow"), Is.False);
         }
+        
+        [Test]
+        public void BagContainsNoOtherBags()
+        {
+            var bag = new BagRule("White");
+            Assert.That(bag.CanContain("Dotted Black"), Is.False);
+        }
     }
 }
