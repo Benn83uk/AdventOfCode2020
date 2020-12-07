@@ -55,5 +55,23 @@ namespace AdventOfCode2020.App.Baggage
         {
             return $"{_color} with {_children.Count} childen";
         }
+
+        public int NumBagsFor(string color)
+        {
+            return BagsFor(color, new List<BagRule>(), new List<BagRule>()).Count();
+        }
+        
+        private List<BagRule> BagsFor(string color, List<BagRule> visitedRules, List<BagRule> currentValid)
+        {
+            if (visitedRules.Contains(this)) return new List<BagRule>();
+            visitedRules.Add(this);
+            if (CanContain(color) && !_color.Equals(color)) currentValid.Add(this);
+            foreach (var child in _children)
+            {
+                child.BagsFor(color, visitedRules, currentValid);
+            }
+
+            return currentValid;
+        }
     }
 }
