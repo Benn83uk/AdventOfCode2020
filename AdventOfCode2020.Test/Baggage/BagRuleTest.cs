@@ -86,7 +86,6 @@ namespace AdventOfCode2020.Test.Baggage
             whiteBag.AddRule(blueBag);
             var yellowBag = new BagRule("Muted Yellow");
             blueBag.AddRule(yellowBag);
-            yellowBag.AddRule(whiteBag);
             Assert.That(whiteBag.NumBagsFor("Muted Yellow"), Is.EqualTo(2));
         }
 
@@ -134,7 +133,7 @@ namespace AdventOfCode2020.Test.Baggage
             root.AddRule(dottedBlackBag);
             root.AddRule(fadedBlueBag);
             root.AddRule(vibrantPlumBag);
-            Assert.That(root.NumBagsFor("shiny gold")-1, Is.EqualTo(4));
+            Assert.That(root.NumBagsFor("shiny gold"), Is.EqualTo(4));
         }
         
         [Test]
@@ -168,7 +167,35 @@ namespace AdventOfCode2020.Test.Baggage
         {
             var lines = File.ReadAllLines("TestFiles/DaySevenExample.txt");
             var root = BagRule.Create(lines);
-            Assert.That(root.NumBagsFor("shiny gold")-1, Is.EqualTo(4));
+            Assert.That(root.NumBagsFor("shiny gold"), Is.EqualTo(4));
+        }
+        
+        [Test]
+        public void CanCreateSimpleRulesMultipleSentencesColorExists()
+        {
+            var root = BagRule.Create(
+                "blue bags contain 1 dotted black bag",
+                "dotted black bags contain no other bags.");
+            Assert.That(root.NumBagsFor("dotted black"), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void CanCreateSimpleRulesMultipleSentencesColorDoesNotExist()
+        {
+            var root = BagRule.Create(
+                "blue bags contain 1 dotted black bag",
+                "dotted black bags contain no other bags.");
+            Assert.That(root.NumBagsFor("shiny gold"), Is.EqualTo(0));
+        }
+        
+        [Test]
+        public void CanCreateMoreComplexRulesMultipleSentences()
+        {
+            var root = BagRule.Create(
+                "blue bags contain 1 dotted black bag, 3 faded blue bags.",
+                "dotted black bags contain 2 faded blue bag",
+                "faded blue bags contain no other bags.");
+            Assert.That(root.NumBagsFor("faded blue"), Is.EqualTo(2));
         }
     }
 }

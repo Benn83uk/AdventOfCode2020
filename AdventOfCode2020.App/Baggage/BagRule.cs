@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -59,7 +60,13 @@ namespace AdventOfCode2020.App.Baggage
 
         public int NumBagsFor(string color)
         {
-            return BagsFor(color, new List<BagRule>(), new List<BagRule>()).Count();
+            var bags = BagsFor(color, new List<BagRule>(), new List<BagRule>());
+            if (this._color.Equals("ROOT"))
+            {
+                bags.Remove(this);
+            }
+
+            return bags.Count();
         }
         
         private List<BagRule> BagsFor(string color, List<BagRule> visitedRules, List<BagRule> currentValid)
@@ -95,16 +102,19 @@ namespace AdventOfCode2020.App.Baggage
                     continue;
                 }
                 
-                var matchColor = Regex.Match(rule, "(?<color>.*?) bags contain");
+                var matchColor = Regex.Match(rule, "(?<color>.+?) bags contain");
                 var color = matchColor.Groups["color"].Value;
                 var currentBag = rulesList.First(b => b._color == color);
 
                 var ruleChildren = rule.Replace(matchColor.Value, "");
 
-                var matchChildren = Regex.Match(rule, "bags contain (?<number>[0-9]*?) (?<color>.*?) bag");
-                var childColor = matchChildren.Groups["color"].Value;
-                var childBag = rulesList.First(b => b._color == childColor);
-                currentBag.AddRule(childBag);
+                var matchChildren = Regex.Matches(ruleChildren, "(?<number>[0-9]+?) (?<color>[a-z\\s]+?) bag");
+                foreach (Match matchChild in matchChildren)
+                {
+                    var childColor = matchChild.Groups["color"].Value;
+                    var childBag = rulesList.First(b => b._color == childColor);
+                    currentBag.AddRule(childBag);
+                }
             }
             
             var root = new BagRule("ROOT");
