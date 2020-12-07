@@ -197,5 +197,13 @@ namespace AdventOfCode2020.Test.Baggage
                 "faded blue bags contain no other bags.");
             Assert.That(root.NumBagsFor("faded blue"), Is.EqualTo(2));
         }
+        
+        [Test]
+        public void DaySevenTaskOne()
+        {
+            var lines = File.ReadAllLines("TestFiles/DaySevenInput.txt");
+            var root = BagRule.Create(lines);
+            Assert.That(root.NumBagsFor("shiny gold"), Is.EqualTo(164));
+        }
     }
 }
