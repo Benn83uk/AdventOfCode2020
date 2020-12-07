@@ -9,17 +9,17 @@ namespace AdventOfCode2020.App.Baggage
     public class BagRule
     {
         private readonly string _color;
-        private readonly List<BagRule> _children;
+        private readonly Dictionary<BagRule, int> _children;
 
         public BagRule(string color)
         {
             _color = color;
-            _children = new List<BagRule>();
+            _children = new Dictionary<BagRule, int>();
         }
 
         public void AddRule(BagRule rule)
         {
-            _children.Add(rule);
+            _children.Add(rule, 0);
         }
 
         public bool CanContain(string color)
@@ -32,7 +32,7 @@ namespace AdventOfCode2020.App.Baggage
             if (visitedRules.Contains(this)) return false;
             visitedRules.Add(this);
             if (_color.Equals(color)) return true;
-            return _children.Exists(child => child.CanContain(color, visitedRules));
+            return _children.Keys.Count(child => child.CanContain(color, visitedRules)) > 0;
         }
         
         protected bool Equals(BagRule other)
@@ -76,7 +76,7 @@ namespace AdventOfCode2020.App.Baggage
             if (CanContain(color) && !_color.Equals(color)) currentValid.Add(this);
             foreach (var child in _children)
             {
-                child.BagsFor(color, visitedRules, currentValid);
+                child.Key.BagsFor(color, visitedRules, currentValid);
             }
 
             return currentValid;
