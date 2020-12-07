@@ -6,24 +6,30 @@ namespace AdventOfCode2020.App.Baggage
     public class BagRule
     {
         private readonly string _color;
-        private readonly BagRule[] _children;
+        private readonly List<BagRule> _children;
 
-        public BagRule(string color, params string[] containsColors)
+        public BagRule(string color)
         {
             _color = color;
-            var children = new List<BagRule>();
-            foreach (var childColor in containsColors)
-            {
-                var bagRule = children.FirstOrDefault(br => br._color.Equals(childColor)) ?? new BagRule(childColor);
-                children.Add(bagRule);
-            }
+            _children = new List<BagRule>();
+        }
 
-            _children = children.ToArray();
+        public void AddRule(BagRule rule)
+        {
+            _children.Add(rule);
         }
 
         public bool CanContain(string color)
         {
-            return _children.Where(child => child._color.Equals(color)).Count() > 0;
+            return CanContain(color, new List<BagRule>());
+        }
+        
+        private bool CanContain(string color, List<BagRule> visitedRules)
+        {
+            if (visitedRules.Contains(this)) return false;
+            visitedRules.Add(this);
+            if (_color.Equals(color)) return true;
+            return _children.Exists(child => child.CanContain(color, visitedRules));
         }
     }
 }
