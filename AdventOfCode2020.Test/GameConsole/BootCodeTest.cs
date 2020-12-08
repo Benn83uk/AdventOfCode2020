@@ -87,5 +87,13 @@ namespace AdventOfCode2020.Test.GameConsole
             var code = new BootCode(input);
             Assert.That(code.Run(), Is.EqualTo(5));
         }
+        
+        [Test]
+        public void DayEightTaskOneAnswer()
+        {
+            var input = File.ReadAllLines("TestFiles/DayEightInput.txt");
+            var code = new BootCode(input);
+            Assert.That(code.Run(), Is.EqualTo(1949));
+        }
     }
 }
