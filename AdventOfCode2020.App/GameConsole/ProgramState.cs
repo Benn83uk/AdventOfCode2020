@@ -2,18 +2,28 @@ namespace AdventOfCode2020.App.GameConsole
 {
     public class ProgramState
     {
-        private readonly int _accumulator;
-        private readonly int _pointer;
+        public readonly int Accumulator;
+        public readonly int Pointer;
         
         public ProgramState(int accumulator, int pointer)
         {
-            _accumulator = accumulator;
-            _pointer = pointer;
+            Accumulator = accumulator;
+            Pointer = pointer;
         }
 
-        public int AccumulatorValue()
+        public ProgramState NoOp()
         {
-            return _accumulator;
+            return new ProgramState(Accumulator, Pointer + 1);
+        }
+
+        public ProgramState IncreaseAccumulator(in int value)
+        {
+            return new ProgramState(Accumulator + value, Pointer+1);
+        }
+
+        public ProgramState Jump(int value)
+        {
+            return new ProgramState(Accumulator, Pointer + value);
         }
     }
 }

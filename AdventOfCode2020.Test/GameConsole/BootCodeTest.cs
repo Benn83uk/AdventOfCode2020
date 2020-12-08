@@ -1,5 +1,6 @@
 using System.Reflection.Metadata.Ecma335;
 using AdventOfCode2020.App.GameConsole;
+using Microsoft.AspNetCore.Routing.Matching;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -14,7 +15,53 @@ namespace AdventOfCode2020.Test.GameConsole
             var code = new BootCode(
                 new NoOp()
             );
-            Assert.That(code.AccumulatorValue(), Is.EqualTo(0));
+            Assert.That(code.Run(), Is.EqualTo(0));
+        }
+        
+        [Test]
+        public void RunAcc()
+        {
+            var code = new BootCode(
+                new NoOp(),
+                new Acc(3)
+            );
+            Assert.That(code.Run(), Is.EqualTo(3));
+        }
+        
+        [Test]
+        public void RunTwoAcc()
+        {
+            var code = new BootCode(
+                new NoOp(),
+                new Acc(3),
+                new Acc(4)
+            );
+            Assert.That(code.Run(), Is.EqualTo(7));
+        }        
+        
+        [Test]
+        public void RunJmp()
+        {
+            var code = new BootCode(
+                new NoOp(),
+                new Jmp(2),
+                new Acc(3),
+                new Acc(4)
+            );
+            Assert.That(code.Run(), Is.EqualTo(4));
+        }
+        
+        [Test]
+        public void RunJmpStopWhenLoop()
+        {
+            var code = new BootCode(
+                new NoOp(),
+                new Jmp(2),
+                new Acc(3),
+                new Acc(4),
+                new Jmp(-2)
+            );
+            Assert.That(code.Run(), Is.EqualTo(7));
         }
     }
 }
