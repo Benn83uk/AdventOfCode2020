@@ -1,3 +1,4 @@
+using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using AdventOfCode2020.App.GameConsole;
 using Microsoft.AspNetCore.Routing.Matching;
@@ -77,6 +78,14 @@ namespace AdventOfCode2020.Test.GameConsole
                 "acc -10"
             );
             Assert.That(code.Run(), Is.EqualTo(9));
+        }
+
+        [Test]
+        public void DayEightExample()
+        {
+            var input = File.ReadAllLines("TestFiles/DayEightExample.txt");
+            var code = new BootCode(input);
+            Assert.That(code.Run(), Is.EqualTo(5));
         }
     }
 }
