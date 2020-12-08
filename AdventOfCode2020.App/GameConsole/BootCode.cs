@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020.App.GameConsole
 {
@@ -6,10 +7,27 @@ namespace AdventOfCode2020.App.GameConsole
     {
         private readonly IInstruction[] _instructions;
         
-
         public BootCode(params IInstruction[] instructions)
         {
             _instructions = instructions;
+        }
+        
+        public BootCode(params string[] instructions)
+        {
+            _instructions = instructions.Select(CreateInstruction).ToArray();
+        }
+
+        private static IInstruction CreateInstruction(string instruction)
+        {
+            var splitBySpace = instruction.Split(' ');
+            var op = splitBySpace[0];
+            var input = int.Parse(splitBySpace[1]);
+            return op switch
+            {
+                "acc" => new Acc(input),
+                "jmp" => new Jmp(input),
+                _ => new NoOp()
+            };
         }
 
         public int Run()

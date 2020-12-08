@@ -59,9 +59,24 @@ namespace AdventOfCode2020.Test.GameConsole
                 new Jmp(2),
                 new Acc(3),
                 new Acc(4),
-                new Jmp(-2)
+                new Jmp(-2),
+                new Acc(10)
             );
             Assert.That(code.Run(), Is.EqualTo(7));
+        }
+
+        [Test]
+        public void LoadFromStringArray()
+        {
+            var code = new BootCode(
+                "nop +0",
+                "jmp +2",
+                "acc +4",
+                "acc +5",
+                "jmp -2",
+                "acc -10"
+            );
+            Assert.That(code.Run(), Is.EqualTo(9));
         }
     }
 }
