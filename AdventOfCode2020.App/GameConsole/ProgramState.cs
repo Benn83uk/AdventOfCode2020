@@ -4,6 +4,7 @@ namespace AdventOfCode2020.App.GameConsole
     {
         public readonly int Accumulator;
         public readonly int Pointer;
+        public bool Looped = false;
         
         public ProgramState(int accumulator, int pointer)
         {

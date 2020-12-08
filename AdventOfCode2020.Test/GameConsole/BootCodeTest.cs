@@ -14,7 +14,7 @@ namespace AdventOfCode2020.Test.GameConsole
         public void RunNop()
         {
             var code = new BootCode(
-                new NoOp()
+                new NoOp(0)
             );
             Assert.That(code.Run(), Is.EqualTo(0));
         }
@@ -23,7 +23,7 @@ namespace AdventOfCode2020.Test.GameConsole
         public void RunAcc()
         {
             var code = new BootCode(
-                new NoOp(),
+                new NoOp(0),
                 new Acc(3)
             );
             Assert.That(code.Run(), Is.EqualTo(3));
@@ -33,7 +33,7 @@ namespace AdventOfCode2020.Test.GameConsole
         public void RunTwoAcc()
         {
             var code = new BootCode(
-                new NoOp(),
+                new NoOp(0),
                 new Acc(3),
                 new Acc(4)
             );
@@ -44,7 +44,7 @@ namespace AdventOfCode2020.Test.GameConsole
         public void RunJmp()
         {
             var code = new BootCode(
-                new NoOp(),
+                new NoOp(0),
                 new Jmp(2),
                 new Acc(3),
                 new Acc(4)
@@ -56,7 +56,7 @@ namespace AdventOfCode2020.Test.GameConsole
         public void RunJmpStopWhenLoop()
         {
             var code = new BootCode(
-                new NoOp(),
+                new NoOp(0),
                 new Jmp(2),
                 new Acc(3),
                 new Acc(4),
@@ -94,6 +94,50 @@ namespace AdventOfCode2020.Test.GameConsole
             var input = File.ReadAllLines("TestFiles/DayEightInput.txt");
             var code = new BootCode(input);
             Assert.That(code.Run(), Is.EqualTo(1949));
+        }
+        
+        [Test]
+        public void HealJmpAndRun()
+        {
+            var code = new BootCode(
+                new NoOp(0),
+                new Jmp(2),
+                new Acc(3),
+                new Acc(4),
+                new Jmp(-2),
+                new Acc(10)
+            );
+            Assert.That(code.HealAndRun(), Is.EqualTo(14));
+        }
+        
+        [Test]
+        public void HealNoOpAndRun()
+        {
+            var code = new BootCode(
+                new NoOp(0),
+                new Jmp(2),
+                new Acc(3),
+                new NoOp(2),
+                new Jmp(-2),
+                new Acc(10)
+            );
+            Assert.That(code.HealAndRun(), Is.EqualTo(10));
+        }
+        
+        [Test]
+        public void DayEightExampleWithHeal()
+        {
+            var input = File.ReadAllLines("TestFiles/DayEightExample.txt");
+            var code = new BootCode(input);
+            Assert.That(code.HealAndRun(), Is.EqualTo(8));
+        }
+        
+        [Test]
+        public void DayEightTaskTwoAnswer()
+        {
+            var input = File.ReadAllLines("TestFiles/DayEightInput.txt");
+            var code = new BootCode(input);
+            Assert.That(code.HealAndRun(), Is.EqualTo(2092));
         }
     }
 }
