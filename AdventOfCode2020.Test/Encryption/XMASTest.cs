@@ -62,5 +62,20 @@ namespace AdventOfCode2020.Test.Encryption
             var xmas = new Xmas(25, sequence);
             Assert.That(xmas.FirstInvalidNumber(), Is.EqualTo(1038347917));
         }
+        
+        [Test]
+        public void WeaknessForPreambleThree()
+        {
+            var xmas = new Xmas(3, new long[] {2, 1, 3, 4, 8, 12});
+            Assert.That(xmas.FindWeakness(), Is.EqualTo(5));
+        }
+        
+        [Test]
+        public void DayNineTaskTwoExample()
+        {
+            var sequence = new long[] {35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576};
+            var xmas = new Xmas(5, sequence);
+            Assert.That(xmas.FindWeakness(), Is.EqualTo(62));
+        }
     }
 }

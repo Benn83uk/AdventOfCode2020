@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2020.App.Encryption
 {
@@ -36,6 +38,24 @@ namespace AdventOfCode2020.App.Encryption
                 if (!isValid) return numToCheck;
             }
             throw new XmasException("No invalid numbers");
+        }
+
+        public long FindWeakness()
+        {
+            var invalidNumber = FirstInvalidNumber();
+            var numList = new List<long>();
+            for (var i = 0; i < Array.IndexOf(_numbers, invalidNumber); i++)
+            {
+                numList = new List<long>();
+                for (var x = i; x < Array.IndexOf(_numbers, invalidNumber); x++)
+                {
+                    numList.Add(_numbers[x]);
+                    if (numList.Sum() == invalidNumber) break;
+                }
+                if (numList.Sum() == invalidNumber) break;
+            }
+
+            return numList.Min() + numList.Max();
         }
     }
 }
