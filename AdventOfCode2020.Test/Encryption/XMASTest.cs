@@ -13,5 +13,12 @@ namespace AdventOfCode2020.Test.Encryption
             var xmas = new Xmas(2, new int[] {1, 2, 3});
             Assert.Throws<XmasException>(() => xmas.FirstInvalidNumber());
         }
+        
+        [Test]
+        public void InvalidForPreeambleOfTwo()
+        {
+            var xmas = new Xmas(2, new int[] {1, 2, 4});
+            Assert.That(xmas.FirstInvalidNumber(), Is.EqualTo(4));
+        }
     }
 }
