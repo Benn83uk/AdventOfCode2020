@@ -5,15 +5,15 @@ namespace AdventOfCode2020.App.Encryption
     public class Xmas
     {
         private readonly int _preambleLength;
-        private readonly int[] _numbers;
+        private readonly long[] _numbers;
 
-        public Xmas(int preambleLength, int[] numbers)
+        public Xmas(int preambleLength, long[] numbers)
         {
             _preambleLength = preambleLength;
             _numbers = numbers;
         }
 
-        public int FirstInvalidNumber()
+        public long FirstInvalidNumber()
         {
             for (var i = _preambleLength; i < _numbers.Length; i++)
             {
