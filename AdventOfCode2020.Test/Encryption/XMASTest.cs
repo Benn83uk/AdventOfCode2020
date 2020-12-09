@@ -77,5 +77,14 @@ namespace AdventOfCode2020.Test.Encryption
             var xmas = new Xmas(5, sequence);
             Assert.That(xmas.FindWeakness(), Is.EqualTo(62));
         }
+        
+        [Test]
+        public void DayNineTaskTwoAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayNineInput.txt");
+            var sequence = lines.Select(long.Parse).ToArray();
+            var xmas = new Xmas(25, sequence);
+            Assert.That(xmas.FindWeakness(), Is.EqualTo(137394018));
+        }
     }
 }
