@@ -6,6 +6,7 @@ namespace AdventOfCode2020.App.Joltage
 {
     public class AdapterList
     {
+        private readonly int[] _tribbanaciSequence = new[] {1, 1, 2, 4, 7, 13, 24};
         private readonly int[] _adapters;
 
         public AdapterList(params int[] adapters)
@@ -59,14 +60,29 @@ namespace AdventOfCode2020.App.Joltage
 
         private long NumArrangementsByPattern(int[] orderedList)
         {
-            //Look for groups where the difference between each is 1.
+            var groupLengths = GroupsOfDiffOne(orderedList);
+            return MultiplyGroupsByTribannaci(groupLengths);
+        }
+
+        private long MultiplyGroupsByTribannaci(List<int> groupLengths)
+        {
+            long result = 1;
+            foreach (var length in groupLengths.Where(l => l > 1))
+            {
+                result = result * _tribbanaciSequence[length];
+            }
+
+            return result;
+        }
+
+        private static List<int> GroupsOfDiffOne(int[] orderedList)
+        {
             var groupLengths = new List<int>();
             for (var i = 0; i < orderedList.Length; i++)
             {
                 var currentGroup = 0;
-                for (var x = i; x < orderedList.Length-1; x++)
+                for (var x = i; x < orderedList.Length - 1; x++)
                 {
-                    Console.WriteLine($"Diff {orderedList[x + 1] - orderedList[x]}");
                     if (orderedList[x + 1] - orderedList[x] == 1)
                     {
                         currentGroup++;
@@ -77,19 +93,11 @@ namespace AdventOfCode2020.App.Joltage
                         break;
                     }
                 }
-                //Console.WriteLine($"Group of {currentGroup}");
+
                 groupLengths.Add(currentGroup);
             }
 
-            long result = 1;
-            foreach (var length in groupLengths.Where(l => l > 1))
-            {
-                if (length == 2) result = result * 2;
-                else if (length == 3) result = result * 4;
-                else if (length == 4) result = result * 7;
-                else if (length == 5) result = result * 13;
-            }
-            return result;
+            return groupLengths;
         }
 
         // (0) -> 2 -> 3 -> 5 -> (8)
