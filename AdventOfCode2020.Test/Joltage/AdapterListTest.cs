@@ -127,7 +127,7 @@ namespace AdventOfCode2020.Test.Joltage
             var adapters = new AdapterList(numbers);
             var result = adapters.NumArrangements();
 
-            Assert.That(result, Is.EqualTo(0));
+            Assert.That(result, Is.EqualTo(518344341716992));
         }
 
         [Test]
