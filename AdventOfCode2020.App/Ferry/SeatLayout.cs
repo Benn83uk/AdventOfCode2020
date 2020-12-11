@@ -1,12 +1,28 @@
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
 
 namespace AdventOfCode2020.App.Ferry
 {
     public class SeatLayout
     {
+        protected bool Equals(SeatLayout other)
+        {
+            return ToString().Equals(other.ToString());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SeatLayout) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (_seats != null ? _seats.GetHashCode() : 0);
+        }
+
         public const char Occupied = '#';
         public const char Floor = '.';
         public const char Free = 'L';
@@ -81,11 +97,9 @@ namespace AdventOfCode2020.App.Ferry
                 for (var yDiff = -1; yDiff <= 1; yDiff++)
                 {
                     if (xDiff == 0 && yDiff == 0) continue;
-                    Console.WriteLine($"Checking {xDiff},{yDiff}");
                     if (IsSeatOccupiedAt(x + xDiff, y + yDiff)) occupiedCount++;
                 }
             }
-            Console.WriteLine($"Occupied Count: {occupiedCount}");
             return occupiedCount;
         }
 
@@ -99,6 +113,22 @@ namespace AdventOfCode2020.App.Ferry
         public override string ToString()
         {
             return _seats.Select(r => new string(r)).Aggregate((a, b) => $"{a}{Environment.NewLine}{b}");
+        }
+
+        public SeatLayout ApplyRulesUntilStable()
+        {
+            var iterationCount = 1;
+            var previousLayout = this;
+            var newLayout = ApplyRules();
+            while (!previousLayout.Equals(newLayout))
+            {
+                Console.WriteLine($"{Environment.NewLine}Iteration {iterationCount}");
+                Console.WriteLine(newLayout);
+                iterationCount++;
+                previousLayout = newLayout;
+                newLayout = newLayout.ApplyRules();
+            }
+            return newLayout;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using AdventOfCode2020.App.Ferry;
 using NUnit.Framework;
 
@@ -82,6 +83,47 @@ namespace AdventOfCode2020.Test.Ferry
             var result = layout.ApplyRules();
             Console.WriteLine(result);
             Assert.That(result.NumOccupiedSeats(), Is.EqualTo(4));
+        }
+
+        [Test]
+        public void DayElevenExampleStepOne()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(71));
+        }
+        
+        [Test]
+        public void DayElevenExampleStepTwo()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyRules().ApplyRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(20));
+        }
+        
+        [Test]
+        public void DayElevenExample()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyRulesUntilStable();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(37));
+        }
+
+        [Test]
+        public void TestEquals()
+        {
+            var layout1 = new SeatLayout("###", ".#.", "..#");
+            var layout2 = new SeatLayout("###", ".#.", "..#");
+            Assert.That(layout1, Is.EqualTo(layout2));
         }
     }
 }
