@@ -109,6 +109,13 @@ namespace AdventOfCode2020.App.Ferry
             if (x >= _seats[y].Length || x < 0) return false;
             return _seats[y][x] == Occupied;
         }
+        
+        private bool IsSeatFreeAt(in int x, in int y)
+        {
+            if (y >= _seats.Length || y < 0) return false;
+            if (x >= _seats[y].Length || x < 0) return false;
+            return _seats[y][x] == Free;
+        }
 
         public override string ToString()
         {
@@ -127,6 +134,133 @@ namespace AdventOfCode2020.App.Ferry
                 iterationCount++;
                 previousLayout = newLayout;
                 newLayout = newLayout.ApplyRules();
+            }
+            return newLayout;
+        }
+
+        public SeatLayout ApplyNewRules()
+        {
+            var height = _seats.Length;
+            var width = _seats[0].Length;
+            var newSeats = new char[height][];
+            for (var y = 0; y < height; y++)
+            {
+                newSeats[y] = new char[width];
+                for (var x = 0; x < width; x++)
+                {
+                    newSeats[y][x] = _seats[y][x];
+                    
+                    if (_seats[y][x] == Free)
+                    {
+                        if (NumOccupiedSeatsVisibleFromSeatAt(x,y) == 0)
+                        {
+                            newSeats[y][x] = Occupied;
+                        }
+                    } else if (_seats[y][x] == Occupied)
+                    {
+                        if (NumOccupiedSeatsVisibleFromSeatAt(x,y) >= 5)
+                        {
+                            newSeats[y][x] = Free;
+                        }
+                    }
+                }
+            }
+
+            return new SeatLayout(newSeats);
+        }
+        
+        private int NumOccupiedSeatsVisibleFromSeatAt(in int x, in int y)
+        {
+            var occupiedCount = 0;
+
+            //Right
+            for (var xDiff = 1; x + xDiff < _seats[y].Length; xDiff++)
+            {
+                if (IsSeatFreeAt(x + xDiff, y)) break;
+                if (!IsSeatOccupiedAt(x + xDiff, y)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //Left
+            for (var xDiff = 1; x - xDiff >= 0; xDiff++)
+            {
+                if (IsSeatFreeAt(x - xDiff, y)) break;
+                if (!IsSeatOccupiedAt(x - xDiff, y)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //Down
+            for (var yDiff = 1; y + yDiff < _seats.Length; yDiff++)
+            {
+                if (IsSeatFreeAt(x, y + yDiff)) break;
+                if (!IsSeatOccupiedAt(x, y + yDiff)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //Up
+            for (var yDiff = 1; y - yDiff >= 0; yDiff++)
+            {
+                if (IsSeatFreeAt(x, y - yDiff)) break;
+                if (!IsSeatOccupiedAt(x, y - yDiff)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //TopLeft
+            for (var diff = 1; y - diff >= 0 && x-diff >= 0; diff++)
+            {
+                if (IsSeatFreeAt(x-diff, y - diff)) break;
+                if (!IsSeatOccupiedAt(x-diff, y - diff)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            
+            //TopRight
+            for (var diff = 1; y - diff >= 0 && x + diff < _seats[y].Length; diff++)
+            {
+                if (IsSeatFreeAt(x+diff, y - diff)) break;
+                if (!IsSeatOccupiedAt(x+diff, y - diff)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //BottomRight
+            for (var diff = 1; y + diff < _seats.Length && x + diff < _seats[y].Length; diff++)
+            {
+                if (IsSeatFreeAt(x + diff, y + diff)) break;
+                if (!IsSeatOccupiedAt(x+diff, y+diff)) continue;
+                occupiedCount++;
+                break;
+            }
+            
+            //BottomLeft
+            for (var diff = 1; y + diff < _seats.Length && x - diff >= 0; diff++)
+            {
+                if (IsSeatFreeAt(x - diff, y + diff)) break;
+                if (!IsSeatOccupiedAt(x-diff, y+diff)) continue;
+                occupiedCount++;
+                break;
+            }
+
+            return occupiedCount;
+        }
+
+        public SeatLayout ApplyNewRulesUntilStable()
+        {
+            var iterationCount = 1;
+            var previousLayout = this;
+            var newLayout = ApplyNewRules();
+            while (!previousLayout.Equals(newLayout))
+            {
+                Console.WriteLine($"{Environment.NewLine}Iteration {iterationCount}");
+                Console.WriteLine(newLayout);
+                iterationCount++;
+                previousLayout = newLayout;
+                newLayout = newLayout.ApplyNewRules();
             }
             return newLayout;
         }

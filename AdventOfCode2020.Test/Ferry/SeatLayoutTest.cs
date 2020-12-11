@@ -127,7 +127,7 @@ namespace AdventOfCode2020.Test.Ferry
         }
         
         [Test]
-        public void DayElevenAnswer()
+        public void DayElevenTaskOneAnswer()
         {
             var lines = File.ReadAllLines("TestFiles/DayElevenInput.txt");
             var layout = new SeatLayout(lines);
@@ -135,6 +135,165 @@ namespace AdventOfCode2020.Test.Ferry
             var result = layout.ApplyRulesUntilStable();
             Console.WriteLine(result);
             Assert.That(result.NumOccupiedSeats(), Is.EqualTo(2418));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToRightRemainsEmpty()
+        {
+            var layout = new SeatLayout("L.#", "...");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToLeftRemainsEmpty()
+        {
+            var layout = new SeatLayout("#.L", "...");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToBottomRemainsEmpty()
+        {
+            var layout = new SeatLayout("L..", "...", "#..");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToTopRemainsEmpty()
+        {
+            var layout = new SeatLayout("#..", "...", "L..");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToTopLeftRemainsEmpty()
+        {
+            var layout = new SeatLayout("#..", "...", "..L");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToTopLeftRemainsEmpty2()
+        {
+            var layout = new SeatLayout("#..", ".L.", "...");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToTopRightRemainsEmpty()
+        {
+            var layout = new SeatLayout("..#", "...", "L..");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToBottomRightRemainsEmpty()
+        {
+            var layout = new SeatLayout("L..", "...", "..#");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatOccupiedAnywhereToBottomLeftRemainsEmpty()
+        {
+            var layout = new SeatLayout("..L", "...", "#..");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void SingleSeatSeesUnnoccupiedSeatAndSwitchesToBeOccupied()
+        {
+            var layout = new SeatLayout("LL#", "...");
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void DayElevenExampleTaskTwoStepOne()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(71));
+        }
+        
+        [Test]
+        public void DayElevenExampleTaskTwoStepTwo()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyNewRules().ApplyNewRules();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(7));
+        }
+        
+        [Test]
+        public void DayElevenExampleTaskTwoStepThree()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyNewRules();
+            Console.WriteLine(Environment.NewLine + result);
+            result = result.ApplyNewRules();
+            Console.WriteLine(Environment.NewLine + result);
+            result = result.ApplyNewRules();
+            Console.WriteLine(Environment.NewLine + result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(53));
+        }
+        
+        [Test]
+        public void DayElevenExampleTaskTwo()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenExample.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyNewRulesUntilStable();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(26));
+        }
+        
+        [Test]
+        public void DayElevenTaskTwoAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenInput.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyNewRulesUntilStable();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(2144));
         }
     }
 }
