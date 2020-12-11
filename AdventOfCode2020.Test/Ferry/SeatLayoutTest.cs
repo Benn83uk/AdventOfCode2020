@@ -125,5 +125,16 @@ namespace AdventOfCode2020.Test.Ferry
             var layout2 = new SeatLayout("###", ".#.", "..#");
             Assert.That(layout1, Is.EqualTo(layout2));
         }
+        
+        [Test]
+        public void DayElevenAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayElevenInput.txt");
+            var layout = new SeatLayout(lines);
+
+            var result = layout.ApplyRulesUntilStable();
+            Console.WriteLine(result);
+            Assert.That(result.NumOccupiedSeats(), Is.EqualTo(2418));
+        }
     }
 }
