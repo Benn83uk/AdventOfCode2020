@@ -23,11 +23,19 @@ namespace AdventOfCode2020.Test.Ferry
         }
 
         [Test]
-        public void DayTwelveExample()
+        public void DayTwelveTaskOneExample()
         {
             var lines = File.ReadAllLines("TestFiles/DayTwelveExample.txt");
             var route = new RouteNavigation(lines);
             Assert.That(route.DistanceFromStart(), Is.EqualTo(25));
+        }
+        
+        [Test]
+        public void DayTwelveTaskOneAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayTwelveInput.txt");
+            var route = new RouteNavigation(lines);
+            Assert.That(route.DistanceFromStart(), Is.EqualTo(1496));
         }
     }
 }
