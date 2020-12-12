@@ -13,16 +13,13 @@ namespace AdventOfCode2020.App.Ferry
             _y = y;
         }
 
-        public Coordinate Move(char direction)
+        public Coordinate Move(Compass direction)
         {
-            return direction switch
-            {
-                'U' => Up(),
-                'D' => Down(),
-                'L' => Left(),
-                'R' => Right(),
-                _ => new Coordinate(_x, _y)
-            };
+            if (direction.Equals(Compass.North)) return Up();
+            else if (direction.Equals(Compass.South)) return Down();
+            else if (direction.Equals(Compass.West)) return Left();
+            else if (direction.Equals(Compass.East)) return Right();
+            return this;
         }
 
         public Coordinate Up()

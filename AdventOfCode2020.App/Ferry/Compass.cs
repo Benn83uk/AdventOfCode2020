@@ -29,6 +29,30 @@ namespace AdventOfCode2020.App.Ferry
             return myIndex - 1 >= 0 ? Directions[myIndex - 1] : Directions[^1];
         }
 
+        public Compass Left(int degrees)
+        {
+            var heading = this;
+            var numTurns = degrees / 90;
+            for (var turns = 0; turns < numTurns; turns++)
+            {
+                heading = heading.Left();
+            }
+
+            return heading;
+        }
+        
+        public Compass Right(int degrees)
+        {
+            var heading = this;
+            var numTurns = degrees / 90;
+            for (var turns = 0; turns < numTurns; turns++)
+            {
+                heading = heading.Right();
+            }
+
+            return heading;
+        }
+
         private static int IndexOf(Compass direction)
         {
             for (var i = 0; i < Directions.Length; i++)
@@ -41,6 +65,16 @@ namespace AdventOfCode2020.App.Ferry
         public override string ToString()
         {
             return _value;    
+        }
+
+        public static bool TryParse(char c, out Compass direction)
+        {
+            direction = null;
+            foreach (var compassPoint in Directions)
+            {
+                if (compassPoint._value.StartsWith(c)) direction = compassPoint;
+            }
+            return (direction is not null);
         }
     }
 }
