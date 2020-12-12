@@ -99,5 +99,8 @@
       <None Update="TestFiles\DayElevenInput.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestFiles\DayTwelveExample.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 </Project>

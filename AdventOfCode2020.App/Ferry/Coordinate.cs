@@ -44,7 +44,7 @@ namespace AdventOfCode2020.App.Ferry
 
         public int DistanceFromOrigin()
         {
-            return _x + _y;
+            return Math.Abs(_x) + Math.Abs(_y);
         }
             
         public bool Equals(Coordinate other)
