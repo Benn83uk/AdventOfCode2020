@@ -52,10 +52,41 @@ namespace AdventOfCode2020.Test.BusTerminal
         public void DayThirteenTaskTwoExample()
         {
             var lines = File.ReadAllLines("TestFiles/DayThirteenExample.txt");
-            var arriveAtTime = int.Parse(lines[0]);
             var timetable = new Timetable(lines[1]);
             
             Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(1068781));
+        }
+        
+        [Test]
+        public void DayThirteenTaskTwoExampleTwo()
+        {
+            var timetable = new Timetable("67,7,59,61");
+            
+            Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(754018));
+        }
+        
+        [Test]
+        public void DayThirteenTaskTwoExampleThree()
+        {
+            var timetable = new Timetable("67,x,7,59,61");
+            
+            Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(779210));
+        }
+        
+        [Test]
+        public void DayThirteenTaskTwoExampleFour()
+        {
+            var timetable = new Timetable("67,7,x,59,61");
+            
+            Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(1261476));
+        }
+        
+        [Test]
+        public void DayThirteenTaskTwoExampleFive()
+        {
+            var timetable = new Timetable("1789,37,47,1889");
+            
+            Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(1202161486));
         }
         
         [Test]
