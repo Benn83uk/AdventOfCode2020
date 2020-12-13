@@ -18,7 +18,7 @@ namespace AdventOfCode2020.App.BusTerminal
 
         public int FirstBusAfter(int timeAtStop)
         {
-            var currentTimeToWait = int.MaxValue;
+            var currentTimeToWait = long.MaxValue;
             var currentWinner = -1;
             foreach (var busIdStr in _busIds)
             {
@@ -36,16 +36,37 @@ namespace AdventOfCode2020.App.BusTerminal
             return currentWinner;
         }
         
-        public int TimeToWaitForBus(int timeAtStop, int busId) {
+        public long TimeToWaitForBus(long timeAtStop, int busId) {
             var timeSinceLastBus = timeAtStop % busId;
-            return busId - timeSinceLastBus;
+            return timeSinceLastBus == 0 ? 0 : busId - timeSinceLastBus;
         }
 
-        public int Checksum(int timeAtStop)
+        public long Checksum(int timeAtStop)
         {
             var busId = FirstBusAfter(timeAtStop);
             var timeToWaitForBus = TimeToWaitForBus(timeAtStop, busId);
             return timeToWaitForBus * busId;
+        }
+
+        public long EarliestTimeStampForPattern()
+        {
+            long time = 0;
+            var firstBusId = int.Parse(_busIds[0]);
+            for (; time < int.MaxValue - 1; time += firstBusId)
+            {
+                int i = 0; 
+                for (;i < _busIds.Length; i++)
+                {
+                    if (_busIds[i].Equals("x")) continue;
+                    var busId = int.Parse(_busIds[i]);
+                    var timeBusMustArrive = time + i;
+                    if (TimeToWaitForBus(timeBusMustArrive, busId) != 0) break;
+                }
+
+                if (i == _busIds.Length) break;
+            }
+
+            return time;
         }
     }
 }
