@@ -4,24 +4,27 @@ namespace AdventOfCode2020.App.BusTerminal
 {
     public class Timetable
     {
-        private readonly int[] _busIds;
+        private readonly string[] _busIds;
 
         public Timetable(params int[] busIds)
         {
-            _busIds = busIds.OrderBy(a => a).ToArray();
+            _busIds = busIds.Select(b => b.ToString()).ToArray();
         }
         
         public Timetable(string busIds)
         {
-            _busIds = busIds.Split(',').Where(a => !a.Equals("x")).Select(int.Parse).OrderBy(a => a).ToArray();
+            _busIds = busIds.Split(',');
         }
 
         public int FirstBusAfter(int timeAtStop)
         {
             var currentTimeToWait = int.MaxValue;
-            var currentWinner = _busIds[0];
-            foreach (var busId in _busIds)
+            var currentWinner = -1;
+            foreach (var busIdStr in _busIds)
             {
+                if (busIdStr.Equals("x")) continue;
+
+                var busId = int.Parse(busIdStr);
                 var timeToWait = TimeToWaitForBus(timeAtStop, busId);
                 if (timeToWait < currentTimeToWait)
                 {

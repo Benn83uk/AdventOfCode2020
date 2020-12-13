@@ -39,7 +39,6 @@ namespace AdventOfCode2020.Test.BusTerminal
             var arriveAtTime = int.Parse(lines[0]);
             var timetable = new Timetable(lines[1]);
             Assert.That(timetable.Checksum(arriveAtTime), Is.EqualTo(4808));
-            
         }
     }
 }
