@@ -22,8 +22,7 @@ namespace AdventOfCode2020.App.BusTerminal
             var currentWinner = _busIds[0];
             foreach (var busId in _busIds)
             {
-                var timeSinceLastBus = timeAtStop % busId;
-                var timeToWait = busId - timeSinceLastBus;
+                var timeToWait = TimeToWaitForBus(timeAtStop, busId);
                 if (timeToWait < currentTimeToWait)
                 {
                     currentWinner = busId;
@@ -32,6 +31,18 @@ namespace AdventOfCode2020.App.BusTerminal
             }
 
             return currentWinner;
+        }
+        
+        public int TimeToWaitForBus(int timeAtStop, int busId) {
+            var timeSinceLastBus = timeAtStop % busId;
+            return busId - timeSinceLastBus;
+        }
+
+        public int Checksum(int timeAtStop)
+        {
+            var busId = FirstBusAfter(timeAtStop);
+            var timeToWaitForBus = TimeToWaitForBus(timeAtStop, busId);
+            return timeToWaitForBus * busId;
         }
     }
 }

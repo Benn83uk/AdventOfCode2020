@@ -27,7 +27,19 @@ namespace AdventOfCode2020.Test.BusTerminal
             var lines = File.ReadAllLines("TestFiles/DayThirteenExample.txt");
             var arriveAtTime = int.Parse(lines[0]);
             var timetable = new Timetable(lines[1]);
+            
             Assert.That(timetable.FirstBusAfter(arriveAtTime), Is.EqualTo(59));
+            Assert.That(timetable.Checksum(arriveAtTime), Is.EqualTo(295));
+        }
+        
+        [Test]
+        public void DayThirteenTaskOneAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayThirteenInput.txt");
+            var arriveAtTime = int.Parse(lines[0]);
+            var timetable = new Timetable(lines[1]);
+            Assert.That(timetable.Checksum(arriveAtTime), Is.EqualTo(4808));
+            
         }
     }
 }
