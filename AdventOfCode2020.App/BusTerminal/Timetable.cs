@@ -10,6 +10,11 @@ namespace AdventOfCode2020.App.BusTerminal
         {
             _busIds = busIds.OrderBy(a => a).ToArray();
         }
+        
+        public Timetable(string busIds)
+        {
+            _busIds = busIds.Split(',').Where(a => !a.Equals("x")).Select(int.Parse).OrderBy(a => a).ToArray();
+        }
 
         public int FirstBusAfter(int timeAtStop)
         {
