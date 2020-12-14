@@ -9,14 +9,14 @@ namespace AdventOfCode2020.App.Dock
     public class Memory
     {
         private const int MaskSize = 36;
-        private readonly Dictionary<int, long> _addressSpace;
+        private readonly Dictionary<long, long> _addressSpace;
         private IEnumerable<(char, int)> _mask;
 
         public Memory() : this("") { }
 
         public Memory(string mask)
         {
-            _addressSpace = new Dictionary<int, long>();
+            _addressSpace = new Dictionary<long, long>();
             _mask = DecodeMask(mask);
         }
 
@@ -25,7 +25,7 @@ namespace AdventOfCode2020.App.Dock
             return mask.Select((item, index) => (item, index)).Where(m => !m.item.Equals('X'));
         }
 
-        public void Add(int address, long value)
+        public void Add(long address, long value)
         {
             var valueAsBinary = new StringBuilder(Convert.ToString(value, 2).PadLeft(MaskSize, '0'));
             foreach (var bit in _mask)
@@ -55,7 +55,6 @@ namespace AdventOfCode2020.App.Dock
                     var match = Regex.Match(instruction, "mem\\[(?<memAddress>[0-9]+)\\] = (?<value>[0-9]+)\\Z");
                     var memAddress = int.Parse(match.Groups["memAddress"].Value);
                     var value = long.Parse(match.Groups["value"].Value);
-                    Console.WriteLine($"Address: {memAddress} setting value to: {value}");
                     Add(memAddress, value);
                 }
             }
