@@ -55,15 +55,16 @@ namespace AdventOfCode2020.App.BusTerminal
             var busIds = _busIds
                 .Select((item, index) => (item, index))
                 .Where(bus => !bus.item.Equals("x"))
+                .Select(i => (int.Parse(i.item), i.index))
                 .ToArray();
             
-            var period = int.Parse(busIds[0].item);
+            var period = busIds[0].Item1;
             for (; time < long.MaxValue - 1; time += period)
             {
                 int i = 0; 
                 for (;i < busIds.Length; i++)
                 {
-                    var busId = int.Parse(busIds[i].item);
+                    var busId = busIds[i].Item1;
                     var timeBusMustArrive = time + busIds[i].index;
                     if (TimeToWaitForBus(timeBusMustArrive, busId) != 0) break;
                 }
