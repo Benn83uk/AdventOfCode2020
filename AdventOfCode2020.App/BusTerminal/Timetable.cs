@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace AdventOfCode2020.App.BusTerminal
@@ -51,22 +52,26 @@ namespace AdventOfCode2020.App.BusTerminal
         public long EarliestTimeStampForPattern()
         {
             long time = 0;
-            var firstBusId = int.Parse(_busIds[0]);
-            for (; time < int.MaxValue - 1; time += firstBusId)
+            var busIds = _busIds
+                .Select((item, index) => (item, index))
+                .Where(bus => !bus.item.Equals("x"))
+                .ToArray();
+            
+            var period = int.Parse(busIds[0].item);
+            for (; time < long.MaxValue - 1; time += period)
             {
                 int i = 0; 
-                for (;i < _busIds.Length; i++)
+                for (;i < busIds.Length; i++)
                 {
-                    if (_busIds[i].Equals("x")) continue;
-                    var busId = int.Parse(_busIds[i]);
-                    var timeBusMustArrive = time + i;
+                    var busId = int.Parse(busIds[i].item);
+                    var timeBusMustArrive = time + busIds[i].index;
                     if (TimeToWaitForBus(timeBusMustArrive, busId) != 0) break;
                 }
 
-                if (i == _busIds.Length) break;
+                if (i == busIds.Length) return time;
             }
 
-            return time;
+            return -1;
         }
     }
 }

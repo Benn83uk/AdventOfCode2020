@@ -89,8 +89,8 @@ namespace AdventOfCode2020.Test.BusTerminal
             Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(1202161486));
         }
         
+        [Ignore("takes too long")]
         [Test]
-        [Ignore("Takes too long")]
         public void DayThirteenTaskTwoAnswer()
         {
             var lines = File.ReadAllLines("TestFiles/DayThirteenInput.txt");
@@ -98,6 +98,9 @@ namespace AdventOfCode2020.Test.BusTerminal
             var timetable = new Timetable(lines[1]);
             
             Assert.That(timetable.EarliestTimeStampForPattern(), Is.EqualTo(0));
+            
+            //2147483669 too low
+            //100000000000000
         }
     }
 }
