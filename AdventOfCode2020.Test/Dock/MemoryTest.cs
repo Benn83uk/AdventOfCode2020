@@ -42,5 +42,14 @@ namespace AdventOfCode2020.Test.Dock
             memory.Add(lines.Skip(1).ToArray());
             Assert.That(memory.Sum(), Is.EqualTo(165));
         }
+        
+        [Test]
+        public void DayFourteenTaskOneAnswer()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayFourteenInput.txt");
+            var memory = new Memory(lines[0].Replace("mask = ", ""));
+            memory.Add(lines.Skip(1).ToArray());
+            Assert.That(memory.Sum(), Is.EqualTo(9879607673316));
+        }
     }
 }
