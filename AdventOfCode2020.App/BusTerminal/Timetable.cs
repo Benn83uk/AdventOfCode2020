@@ -37,7 +37,7 @@ namespace AdventOfCode2020.App.BusTerminal
             return currentWinner;
         }
         
-        public long TimeToWaitForBus(long timeAtStop, int busId) {
+        public long TimeToWaitForBus(long timeAtStop, long busId) {
             var timeSinceLastBus = timeAtStop % busId;
             return timeSinceLastBus == 0 ? 0 : busId - timeSinceLastBus;
         }
@@ -55,7 +55,7 @@ namespace AdventOfCode2020.App.BusTerminal
             var busIds = _busIds
                 .Select((item, index) => (item, index))
                 .Where(bus => !bus.item.Equals("x"))
-                .Select(i => (int.Parse(i.item), i.index))
+                .Select(i => (long.Parse(i.item), i.index))
                 .ToArray();
             
             var period = busIds[0].Item1;
@@ -70,6 +70,7 @@ namespace AdventOfCode2020.App.BusTerminal
                 }
 
                 if (i == busIds.Length) return time;
+                period = busIds.Take(i).Select(t => t.Item1).Aggregate(MathExtension.LCM);
             }
 
             return -1;
