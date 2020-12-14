@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode2020.App.Dock
 {
@@ -34,6 +35,17 @@ namespace AdventOfCode2020.App.Dock
         public int Sum()
         {
             return _addressSpace.Sum();
+        }
+
+        public void Add(string[] instructions)
+        {
+            foreach (var instruction in instructions)
+            {
+                var match = Regex.Match(instruction, "mem\\[(?<memAddress>[0-9]+)\\] = (?<value>[0-9]+)\\Z");
+                var memAddress = int.Parse(match.Groups["memAddress"].Value);
+                var value = int.Parse(match.Groups["value"].Value);
+                Add(memAddress, value);
+            }
         }
     }
 }

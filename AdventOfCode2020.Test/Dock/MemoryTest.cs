@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using AdventOfCode2020.App.Dock;
 using NUnit.Framework;
 
@@ -29,6 +31,15 @@ namespace AdventOfCode2020.Test.Dock
             memory.Add(8, 11);
             memory.Add(7, 101);
             memory.Add(8, 0);
+            Assert.That(memory.Sum(), Is.EqualTo(165));
+        }
+        
+        [Test]
+        public void DayFourteenTaskOneExampleFromFile()
+        {
+            var lines = File.ReadAllLines("TestFiles/DayFourteenExample.txt");
+            var memory = new Memory(lines[0].Replace("mask = ", ""));
+            memory.Add(lines.Skip(1).ToArray());
             Assert.That(memory.Sum(), Is.EqualTo(165));
         }
     }
